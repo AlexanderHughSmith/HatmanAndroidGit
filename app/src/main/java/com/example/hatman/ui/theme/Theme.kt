@@ -1,4 +1,4 @@
-package com.example.hatmanandroid.ui.theme
+package com.example.hatman.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -18,12 +18,14 @@ import androidx.core.view.ViewCompat
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
+    background = Purple40,
     tertiary = Pink80
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Purple40,
     secondary = PurpleGrey40,
+    background = CustomBlue,
     tertiary = Pink40
 
     /* Other default colors to override
@@ -38,7 +40,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun HatmanAndroidTheme(
+fun HatmanTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
