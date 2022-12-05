@@ -1,16 +1,16 @@
 package com.example.hatman.ui
 
+import android.content.Context
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hatman.data.HatmanRepository
+import com.example.hatman.data.HatmanDataStore
 import com.example.hatman.data.model.Player
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 import kotlin.properties.Delegates
 import kotlin.random.Random
@@ -22,10 +22,12 @@ class SharedViewModel @Inject constructor(
 
     val die1: MutableState<Int> = mutableStateOf(1)
     val die2: MutableState<Int> = mutableStateOf(2)
-    val isDieEnabled: MutableState<Boolean> = mutableStateOf(true)
+    val isDieShown: MutableState<Boolean> = mutableStateOf(false)
     val displayText: MutableState<String> = mutableStateOf("Roll to start")
     val rotateAngle: MutableState<Float> = mutableStateOf(0f)
     val comingFromPlayingScreen: MutableState<Boolean> = mutableStateOf(false)
+
+    private lateinit var hatmanDataStore: HatmanDataStore
 
     private var random = Random(System.currentTimeMillis())
     val rollDice2 = {
@@ -117,6 +119,9 @@ class SharedViewModel @Inject constructor(
             speed += 10
         }
         displayText.value = handleDiceRoll(die1.value, die2.value)
+        hatmanDataStore.saveDisplayText(displayText.value)
+        hatmanDataStore.saveDieOne(die1.value)
+        hatmanDataStore.saveDieTwo(die2.value)
     }
 
     private fun handleDiceRoll(die1: Int, die2:Int): String {
@@ -205,5 +210,38 @@ class SharedViewModel @Inject constructor(
 
     suspend fun updatePlayers(){
         repository.updateAllPlayers(players.value)
+    }
+
+    suspend fun setupDataStore(context: Context) {
+        hatmanDataStore = HatmanDataStore(context)
+        val job = Job()
+        val job2 = Job()
+        val job3 = Job()
+        val scope = CoroutineScope(job + Dispatchers.IO)
+        val scope2 = CoroutineScope(job2 + Dispatchers.IO)
+        val scope3 = CoroutineScope(job2 + Dispatchers.IO)
+        scope.launch {
+            hatmanDataStore.getDieOne.collect {
+                die1.value = it!!.toInt()
+            }
+        }
+        scope2.launch {
+            hatmanDataStore.getDisplayText.collect {
+                displayText.value = it!!
+            }
+        }
+        scope3.launch {
+            hatmanDataStore.getDieTwo.collect {
+                die2.value = it!!.toInt()
+            }
+        }
+        delay(1000L)
+        job.cancel()
+        job2.cancel()
+        job3.cancel()
+        isDieShown.value = true
+    }
+    suspend fun clearDataStore(){
+        hatmanDataStore.resetDataStore()
     }
 }

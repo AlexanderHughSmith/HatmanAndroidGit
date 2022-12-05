@@ -37,7 +37,8 @@ fun QuickPlayScreen() {
             Modifier,
             number1,
             number2,
-            0f
+            0f,
+            true
         )
         Button(
             onClick = {

@@ -26,7 +26,8 @@ fun DisplayDice(
     modifier:Modifier,
     number1: Int,
     number2: Int,
-    rotateAngle: Float
+    rotateAngle: Float,
+    isDieShown: Boolean
 ) {
 
     var dice1: Int = setUpDie(number1)
@@ -36,21 +37,22 @@ fun DisplayDice(
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly
     ){
-        Log.d("TextScreen", "Dice composable")
-        Image(
-            modifier = Modifier
-                .size(LOGO_HEIGHT)
-                .rotate(rotateAngle),
-            painter = painterResource(id = dice1),
-            contentDescription = "Die One"
-        )
-        Image(
-            modifier = Modifier
-                .size(LOGO_HEIGHT)
-                .rotate(-rotateAngle),
-            painter = painterResource(id = dice2),
-            contentDescription = "Die Two"
-        )
+        if(isDieShown){
+            Image(
+                modifier = Modifier
+                    .size(LOGO_HEIGHT)
+                    .rotate(rotateAngle),
+                painter = painterResource(id = dice1),
+                contentDescription = "Die One"
+            )
+            Image(
+                modifier = Modifier
+                    .size(LOGO_HEIGHT)
+                    .rotate(-rotateAngle),
+                painter = painterResource(id = dice2),
+                contentDescription = "Die Two"
+            )
+        }
     }
 }
 
@@ -69,5 +71,5 @@ fun setUpDie(number: Int): Int {
 @Preview
 @Composable
 fun DisplayDicePreview() {
-    DisplayDice(Modifier,3,4,0f)
+    DisplayDice(Modifier,3,4,0f, true)
 }

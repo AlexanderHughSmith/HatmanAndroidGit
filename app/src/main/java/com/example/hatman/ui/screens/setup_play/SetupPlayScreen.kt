@@ -30,6 +30,7 @@ fun SetupPlayScreen(
             coroutineScope.launch {
                 sharedViewModel.comingFromPlayingScreen.value = true
                 sharedViewModel.deleteAllPlayers()
+                sharedViewModel.clearDataStore()
                 navController.popBackStack()
                 navController.navigate(Screens.Setup.route)
             }
