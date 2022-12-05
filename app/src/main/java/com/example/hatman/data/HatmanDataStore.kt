@@ -16,7 +16,7 @@ class HatmanDataStore(private val context: Context) {
         val DIE_TWO = stringPreferencesKey("die_two")
     }
 
-    val getDisplayText: Flow<String?> = context.dataStore.data
+    val getDisplayText: Flow<String> = context.dataStore.data
         .map { preferences ->
             preferences[DISPLAY_TEXT_KEY] ?: "Roll to start!"
         }
@@ -27,7 +27,7 @@ class HatmanDataStore(private val context: Context) {
         }
     }
 
-    val getDieOne: Flow<String?> = context.dataStore.data
+    val getDieOne: Flow<String> = context.dataStore.data
         .map { preferences ->
             preferences[DIE_ONE] ?: "1"
         }
@@ -38,7 +38,7 @@ class HatmanDataStore(private val context: Context) {
         }
     }
 
-    val getDieTwo: Flow<String?> = context.dataStore.data
+    val getDieTwo: Flow<String> = context.dataStore.data
         .map { preferences ->
             preferences[DIE_TWO] ?: "2"
         }

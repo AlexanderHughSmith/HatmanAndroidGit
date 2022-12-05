@@ -214,31 +214,11 @@ class SharedViewModel @Inject constructor(
 
     suspend fun setupDataStore(context: Context) {
         hatmanDataStore = HatmanDataStore(context)
-        val job = Job()
-        val job2 = Job()
-        val job3 = Job()
-        val scope = CoroutineScope(job + Dispatchers.IO)
-        val scope2 = CoroutineScope(job2 + Dispatchers.IO)
-        val scope3 = CoroutineScope(job2 + Dispatchers.IO)
-        scope.launch {
-            hatmanDataStore.getDieOne.collect {
-                die1.value = it!!.toInt()
-            }
+        with(hatmanDataStore) {
+            die1.value = getDieOne.first().toInt()
+            displayText.value = getDisplayText.first()
+            die2.value = getDieTwo.first().toInt()
         }
-        scope2.launch {
-            hatmanDataStore.getDisplayText.collect {
-                displayText.value = it!!
-            }
-        }
-        scope3.launch {
-            hatmanDataStore.getDieTwo.collect {
-                die2.value = it!!.toInt()
-            }
-        }
-        delay(1000L)
-        job.cancel()
-        job2.cancel()
-        job3.cancel()
         isDieShown.value = true
     }
     suspend fun clearDataStore(){
