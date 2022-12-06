@@ -47,6 +47,9 @@ fun SetupPlayAppBar(
                 2 -> {
                     navController.navigate(Screens.About.route)
                 }
+                3 ->{
+                    navController.popBackStack()
+                }
             }
         }
     }
@@ -56,6 +59,14 @@ fun SetupPlayAppBar(
                 text = "Hatman",
                 color = MaterialTheme.colorScheme.primary
             )
+        },
+        navigationIcon = {
+            IconButton(onClick = { navigate = 3 }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_arrow_back),
+                    contentDescription = "Back"
+                )
+            }
         },
 
         actions = {

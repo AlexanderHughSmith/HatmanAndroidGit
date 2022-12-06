@@ -10,14 +10,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
@@ -38,8 +34,16 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SetupAppBar(
-    //navController: NavHostController,
+    navController: NavHostController,
 ) {
+    var navigate: Boolean by remember { mutableStateOf(false) }
+    if(navigate){
+        LaunchedEffect(Unit) {
+            //navController.popBackStack(Screens.Options.route, false)
+            //navController.navigate(Screens.About.route)
+            navController.popBackStack()
+        }
+    }
     CenterAlignedTopAppBar(
         title = {
             Text(
@@ -47,35 +51,15 @@ fun SetupAppBar(
                 color = MaterialTheme.colorScheme.primary
             )
         },
-
-        actions = {
-            /*var expanded by remember { mutableStateOf(false) }
-
+        navigationIcon = {
             IconButton(
-                onClick = { expanded = true }
+                onClick = { navigate = true }
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_vertical_menu),
-                    contentDescription = "temp",
+                    painter = painterResource(id = R.drawable.ic_arrow_back),
+                    contentDescription = "Back"
                 )
-                DropdownMenu(
-                    expanded = expanded,
-                    onDismissRequest = { expanded = false }
-                ) {
-                    DropdownMenuItem(
-                        text = {
-                            Text(
-                                modifier = Modifier
-                                    .padding(start = LARGE_PADDING),
-                                text = "New Game",
-                            )
-                       },
-                        onClick = {
-                            onNewGameClicked()
-                        }
-                    )
-                }
-            }*/
+            }
         },
     )
 }
@@ -85,6 +69,6 @@ fun SetupAppBar(
 @Composable
 fun SetupScreenAppBarPreview() {
     SetupAppBar(
-        //rememberNavController()
+        rememberNavController()
     )
 }

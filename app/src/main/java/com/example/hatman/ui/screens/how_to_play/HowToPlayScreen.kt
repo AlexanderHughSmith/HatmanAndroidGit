@@ -17,7 +17,7 @@ fun HowToPlayScreen(
 ) {
     Scaffold(
         topBar = {
-            SetupScreenAppBar(
+            HowToPlayAppBar(
                 navController = navController
             )
         },

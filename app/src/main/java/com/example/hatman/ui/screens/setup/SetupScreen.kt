@@ -52,7 +52,7 @@ fun SetupScreen(
         //sharedViewModel.comingFromPlayingScreen.value = false
         Scaffold(
             topBar = {
-                SetupAppBar()
+                SetupAppBar(navController = navController)
             },
             content = {
                 SetupScreenContent(

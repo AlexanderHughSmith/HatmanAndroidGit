@@ -1,4 +1,4 @@
-package com.example.hatman.ui.screens.about
+package com.example.hatman.ui.screens.how_to_play
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
@@ -15,20 +15,32 @@ import com.example.hatman.ui.theme.LARGE_PADDING
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AboutScreenAppBar(
+fun HowToPlayAppBar(
     navController: NavHostController
 ) {
     var navigate: Boolean by remember { mutableStateOf(false) }
     if(navigate){
         LaunchedEffect(Unit) {
             //navController.popBackStack(Screens.Options.route, false)
-            navController.navigate(Screens.About.route)
+            //navController.navigate(Screens.About.route)
+            navController.popBackStack()
         }
     }
     CenterAlignedTopAppBar(
+        //Button to go back to the previous screen
+        navigationIcon = {
+            IconButton(
+                onClick = { navigate = true }
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_arrow_back),
+                    contentDescription = "Back"
+                )
+            }
+        },
         title = {
             Text(
-                text = "About",
+                text = "How To Play",
                 color = MaterialTheme.colorScheme.primary
             )
         },
@@ -39,7 +51,7 @@ fun AboutScreenAppBar(
 @Preview(showBackground = true)
 @Composable
 fun SetupScreenAppBarPreview() {
-    AboutScreenAppBar(
+    HowToPlayAppBar(
         rememberNavController()
     )
 }
