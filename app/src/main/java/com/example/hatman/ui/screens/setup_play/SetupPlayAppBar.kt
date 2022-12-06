@@ -47,8 +47,11 @@ fun SetupPlayAppBar(
                 2 -> {
                     navController.navigate(Screens.About.route)
                 }
-                3 ->{
+                3 -> {
                     navController.popBackStack()
+                }
+                4 -> {
+                    navController.navigate(Screens.HowToPlay.route)
                 }
             }
         }
@@ -93,6 +96,18 @@ fun SetupPlayAppBar(
                        },
                         onClick = {
                             navigate = 1
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = {
+                            Text(
+                                modifier = Modifier
+                                    .padding(start = LARGE_PADDING),
+                                text = "Rules",
+                            )
+                        },
+                        onClick = {
+                            navigate = 4
                         }
                     )
                     DropdownMenuItem(
