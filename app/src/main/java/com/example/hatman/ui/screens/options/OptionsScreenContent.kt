@@ -33,7 +33,7 @@ fun OptionsScreenContent(
                     navController.navigate(Screens.QuickPlay.route)
                 }
                 3 -> {
-                    navController.navigate(Screens.QuickPlay.route)
+                    navController.navigate(Screens.HowToPlay.route)
                 }
             }
         }

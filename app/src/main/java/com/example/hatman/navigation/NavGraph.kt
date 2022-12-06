@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.hatman.ui.SharedViewModel
 import com.example.hatman.ui.screens.TextScreen
+import com.example.hatman.ui.screens.how_to_play.HowToPlayScreen
 import com.example.hatman.ui.screens.setup.SetupScreen
 import com.example.hatman.ui.screens.quick_play.QuickPlayScreen
 import com.example.hatman.ui.screens.options.OptionsScreen
@@ -59,6 +60,11 @@ fun SetupNavGraph(
         composable(route = Screens.Text.route) {
             TextScreen(
                 sharedViewModel = sharedViewModel
+            )
+        }
+        composable(route = Screens.HowToPlay.route) {
+            HowToPlayScreen(
+                navController = navController
             )
         }
     }
