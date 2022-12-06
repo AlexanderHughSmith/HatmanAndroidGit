@@ -13,6 +13,7 @@ sealed class Screens(val route: String) {
     object QuickPlay: Screens("quickPlay_screen")
     object Options: Screens("options_screen")
     object HowToPlay : Screens("how_to_play_screen")
+    object About : Screens("about_screen")
 
     object Text : Screens("text_screen")
 }

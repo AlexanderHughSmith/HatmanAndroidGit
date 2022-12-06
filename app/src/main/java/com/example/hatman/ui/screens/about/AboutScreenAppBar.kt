@@ -1,4 +1,4 @@
-package com.example.hatman.ui.screens.options
+package com.example.hatman.ui.screens.about
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
@@ -15,7 +15,7 @@ import com.example.hatman.ui.theme.LARGE_PADDING
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SetupScreenAppBar(
+fun AboutScreenAppBar(
     navController: NavHostController
 ) {
     var navigate: Boolean by remember { mutableStateOf(false) }
@@ -28,22 +28,9 @@ fun SetupScreenAppBar(
     CenterAlignedTopAppBar(
         title = {
             Text(
-                text = "Hatman",
+                text = "About",
                 color = MaterialTheme.colorScheme.primary
             )
-        },
-        actions = {
-            IconButton(
-                onClick = {
-                    navigate = true
-                }
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.info),
-                    contentDescription = "About Section",
-                    tint = MaterialTheme.colorScheme.primary
-                )
-            }
         },
     )
 }
@@ -52,7 +39,7 @@ fun SetupScreenAppBar(
 @Preview(showBackground = true)
 @Composable
 fun SetupScreenAppBarPreview() {
-    SetupScreenAppBar(
+    AboutScreenAppBar(
         rememberNavController()
     )
 }

@@ -37,12 +37,17 @@ fun SetupPlayAppBar(
     navController: NavHostController,
     onNewGameClicked:() -> Unit,
 ) {
-    var navigate by remember {
-        mutableStateOf(false)
-    }
-    if (navigate) {
-        LaunchedEffect(key1 = Unit){
-            onNewGameClicked()
+    var navigate: Int by remember { mutableStateOf(0) }
+    if(navigate != 0){
+        LaunchedEffect(Unit) {
+            when (navigate) {
+                1 -> {
+                    onNewGameClicked()
+                }
+                2 -> {
+                    navController.navigate(Screens.About.route)
+                }
+            }
         }
     }
     CenterAlignedTopAppBar(
@@ -76,7 +81,19 @@ fun SetupPlayAppBar(
                             )
                        },
                         onClick = {
-                            navigate = true
+                            navigate = 1
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = {
+                            Text(
+                                modifier = Modifier
+                                    .padding(start = LARGE_PADDING),
+                                text = "About",
+                            )
+                        },
+                        onClick = {
+                            navigate = 2
                         }
                     )
                 }

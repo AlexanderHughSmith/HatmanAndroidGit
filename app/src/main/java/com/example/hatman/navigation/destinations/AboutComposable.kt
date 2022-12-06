@@ -12,7 +12,7 @@ import com.example.hatman.util.Constants.MAIN_SCREEN
 import com.google.accompanist.navigation.animation.composable
 
 @ExperimentalAnimationApi
-fun NavGraphBuilder.howToPlayComposable(
+fun NavGraphBuilder.aboutComposable(
     navController: NavHostController,
 ){
     composable(
