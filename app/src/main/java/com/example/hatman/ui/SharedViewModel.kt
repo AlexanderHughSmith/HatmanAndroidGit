@@ -26,6 +26,7 @@ class SharedViewModel @Inject constructor(
     val displayText: MutableState<String> = mutableStateOf("Roll to start")
     val rotateAngle: MutableState<Float> = mutableStateOf(0f)
     val comingFromPlayingScreen: MutableState<Boolean> = mutableStateOf(false)
+    val gameAlreadySetUp: MutableState<Boolean> = mutableStateOf(false)
 
     private lateinit var hatmanDataStore: HatmanDataStore
 

@@ -11,8 +11,7 @@ import com.google.accompanist.navigation.animation.composable
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.splashComposable(
-    navigateToMainScreen: () -> Unit,
-    sharedViewModel: SharedViewModel
+    navigateToMainScreen: () -> Unit
 ) {
     composable(
         route = SPLASH_SCREEN,
@@ -23,6 +22,6 @@ fun NavGraphBuilder.splashComposable(
             )
         }
     ) {
-        SplashScreen(navigateToListScreen = navigateToMainScreen, sharedViewModel = sharedViewModel)
+        SplashScreen(navigateToListScreen = navigateToMainScreen)
     }
 }

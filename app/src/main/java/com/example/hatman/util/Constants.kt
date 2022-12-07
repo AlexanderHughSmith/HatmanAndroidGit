@@ -26,6 +26,10 @@ object Constants {
     const val MAX_TITLE_LENGTH = 20
     const val SPLASH_SCREEN_DELAY = 3000L
 
+    const val NORMAL_ANIMATION_SPEED = 300
+    const val FAST_ANIMATION_SPEED = 100
+    const val SLOW_ANIMATION_SPEED = 500
+
     fun GET_FAKE_PLAYERS():List<Player>{
         return listOf(
             Player(0, "Player 0", 0, false, false),

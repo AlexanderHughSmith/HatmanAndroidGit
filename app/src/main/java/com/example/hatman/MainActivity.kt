@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             HatmanTheme {
-                navController = rememberNavController()
+                navController = rememberAnimatedNavController()
                 SetupNavGraph(
                     navController = navController,
                     sharedViewModel = sharedViewModel

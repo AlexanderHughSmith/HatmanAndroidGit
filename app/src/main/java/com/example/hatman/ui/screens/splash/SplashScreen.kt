@@ -31,8 +31,7 @@ import com.example.hatman.ui.SharedViewModel
 
 @Composable
 fun SplashScreen(
-    navigateToListScreen: () -> Unit,
-    sharedViewModel: SharedViewModel
+    navigateToListScreen: () -> Unit
 ) {
     var navigate: Boolean by remember { mutableStateOf(false) }
     if(navigate){

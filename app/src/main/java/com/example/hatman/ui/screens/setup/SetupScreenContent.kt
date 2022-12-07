@@ -27,6 +27,7 @@ fun SetupScreenContent(
     sharedViewModel: SharedViewModel
 ) {
     //val players = remember{ mutableStateListOf("", "", "", "") }
+    sharedViewModel.comingFromPlayingScreen.value = false
     val players = remember{ mutableStateListOf("one", "two", "three", "four") }
     val coroutineScope = rememberCoroutineScope()
     var navigate: Boolean by remember { mutableStateOf(false) }
@@ -51,7 +52,6 @@ fun SetupScreenContent(
         onLetsPlayClicked = {
             coroutineScope.launch {
                 sharedViewModel.addPlayers(players)
-                sharedViewModel.comingFromPlayingScreen.value = false
                 navigate = true
             }
         },

@@ -95,6 +95,7 @@ fun SetupPlayAppBar(
                             )
                        },
                         onClick = {
+                            expanded = false
                             navigate = 1
                         }
                     )
@@ -107,6 +108,7 @@ fun SetupPlayAppBar(
                             )
                         },
                         onClick = {
+                            expanded = false
                             navigate = 4
                         }
                     )
@@ -119,6 +121,7 @@ fun SetupPlayAppBar(
                             )
                         },
                         onClick = {
+                            expanded = false
                             navigate = 2
                         }
                     )
