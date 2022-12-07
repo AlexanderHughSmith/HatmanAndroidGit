@@ -17,6 +17,6 @@ val Pink40 = Color(0xFF7D5260)
 
 val CustomBlue = Color(39,85,251)
 
-val BlendMode.customBackground: Color
-@Composable
-get() = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.background else CustomBlue
+//val BlendMode.customBackground: Color
+//@Composable
+//get() = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.background else CustomBlue
