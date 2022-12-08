@@ -55,7 +55,8 @@ fun SetupNavGraph(
             sharedViewModel = sharedViewModel
         )
         aboutComposable(
-            navController = navController
+            navController = navController,
+            sharedViewModel = sharedViewModel
         )
 
         /*composable(route = Screens.Splash.route) {

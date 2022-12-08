@@ -28,6 +28,8 @@ class SharedViewModel @Inject constructor(
     val rotateAngle: MutableState<Float> = mutableStateOf(0f)
     val comingFromPlayingScreen: MutableState<Boolean> = mutableStateOf(false)
     val gameAlreadySetUp: MutableState<Boolean> = mutableStateOf(false)
+    val useDynamicColors: MutableState<Boolean> = mutableStateOf(true)
+    val darkTheme: MutableState<Boolean?> = mutableStateOf(null)
 
     private lateinit var hatmanDataStore: HatmanDataStore
 

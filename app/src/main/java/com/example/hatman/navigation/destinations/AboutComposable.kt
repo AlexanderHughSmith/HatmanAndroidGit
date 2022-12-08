@@ -16,6 +16,7 @@ import com.google.accompanist.navigation.animation.composable
 @ExperimentalAnimationApi
 fun NavGraphBuilder.aboutComposable(
     navController: NavHostController,
+    sharedViewModel: SharedViewModel
 ){
     composable(
         route = Screens.About.route,
@@ -33,7 +34,8 @@ fun NavGraphBuilder.aboutComposable(
         },
     ) {
         AboutScreen(
-            navController = navController
+            navController = navController,
+            sharedViewModel = sharedViewModel
         )
     }
 }

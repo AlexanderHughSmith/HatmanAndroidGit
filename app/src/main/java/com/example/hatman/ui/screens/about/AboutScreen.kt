@@ -6,12 +6,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import com.example.hatman.ui.SharedViewModel
 import com.example.hatman.ui.screens.options.SetupScreenAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutScreen(
     navController: NavHostController,
+    sharedViewModel: SharedViewModel
 ) {
     Scaffold(
         topBar = {
@@ -21,7 +23,8 @@ fun AboutScreen(
         },
         content = {
             AboutContent(
-                modifier = Modifier.padding(it)
+                modifier = Modifier.padding(it),
+                sharedViewModel = sharedViewModel
             )
         }
     )
