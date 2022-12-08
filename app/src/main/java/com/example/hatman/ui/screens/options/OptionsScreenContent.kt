@@ -19,6 +19,8 @@ import com.example.hatman.ui.theme.LARGER_PADDING
 import com.example.hatman.ui.theme.LARGEST_PADDING
 import com.example.hatman.ui.theme.LARGE_PADDING
 import com.example.hatman.ui.theme.MEDIUM_PADDING
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 @Composable
 fun OptionsScreenContent(
@@ -26,6 +28,7 @@ fun OptionsScreenContent(
     navController: NavHostController,
     sharedViewModel: SharedViewModel,
 ) {
+    val coroutineScope = rememberCoroutineScope()
     var navigate: Int by remember { mutableStateOf(0) }
     if (navigate != 0) {
         LaunchedEffect(Unit) {
@@ -38,6 +41,9 @@ fun OptionsScreenContent(
                 }
                 3 -> {
                     navController.navigate(Screens.HowToPlay.route)
+                }
+                4 -> {
+                    navController.navigate(Screens.SetupPlay.route)
                 }
             }
         }
@@ -53,7 +59,9 @@ fun OptionsScreenContent(
             message = "Setup Game",
             description = "Enter the names of everyone playing. We will let you know who should take a drink by name and keep track of everyone's score.",
             onButtonClick = {
-                navigate = 1
+                coroutineScope.launch {
+                    navigate = if(sharedViewModel.players.first().isNotEmpty()) 4 else 1
+                }
             }
         )
         OptionButtonDescription(

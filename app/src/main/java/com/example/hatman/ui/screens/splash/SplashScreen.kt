@@ -18,6 +18,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,10 +29,13 @@ import com.example.hatman.util.Constants.SPLASH_SCREEN_DELAY
 import kotlinx.coroutines.delay
 import com.example.hatman.R
 import com.example.hatman.ui.SharedViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
 fun SplashScreen(
-    navigateToListScreen: () -> Unit
+    navigateToListScreen: () -> Unit,
+    sharedViewModel: SharedViewModel
 ) {
     var navigate: Boolean by remember { mutableStateOf(false) }
     if(navigate){
@@ -53,9 +57,17 @@ fun SplashScreen(
             durationMillis = 1000
         )
     )
-
+    val context = LocalContext.current
     LaunchedEffect(key1 = true) {
         startAnimation = true
+        //sharedViewModel.getAllPlayers()
+
+        //sharedViewModel.getAllPlayers();
+        sharedViewModel.setupFromSplash(context)
+
+        /*sharedViewModel.setRoles()
+        sharedViewModel.saveChanges()
+        sharedViewModel.setupDataStore(context)*/
         //sharedViewModel.getAllPlayers()
         delay(SPLASH_SCREEN_DELAY)
         navigate = true

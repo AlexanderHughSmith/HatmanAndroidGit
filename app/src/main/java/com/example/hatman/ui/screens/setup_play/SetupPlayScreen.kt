@@ -31,8 +31,9 @@ fun SetupPlayScreen(
                 sharedViewModel.comingFromPlayingScreen.value = true
                 sharedViewModel.deleteAllPlayers()
                 sharedViewModel.clearDataStore()
-                navController.popBackStack()
-                navController.navigate(Screens.Setup.route)
+                navController.navigate(Screens.Setup.route){
+                    navController.popBackStack()
+                }
             }
         }
     }

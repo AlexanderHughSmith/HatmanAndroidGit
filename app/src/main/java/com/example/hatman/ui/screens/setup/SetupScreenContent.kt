@@ -34,7 +34,11 @@ fun SetupScreenContent(
     if(navigate){
         LaunchedEffect(Unit) {
             //navController.popBackStack(Screens.Options.route, false)
-            navController.navigate(Screens.SetupPlay.route)
+            navController.navigate(Screens.SetupPlay.route){
+                popUpTo(Screens.Options.route){
+                    inclusive = false
+                }
+            }
         }
     }
     navController.backQueue.forEachIndexed() { index, backStackEntry ->

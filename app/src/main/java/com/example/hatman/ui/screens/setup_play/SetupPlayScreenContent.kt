@@ -36,13 +36,13 @@ fun SetupPlayScreenContent(
         )
     }
     val coroutineScope = rememberCoroutineScope()
-    val context = LocalContext.current
+    //val context = LocalContext.current
 
     LaunchedEffect(true) {
         //sharedViewModel.startNewGame()
-        sharedViewModel.setRoles()
-        sharedViewModel.saveChanges()
-        sharedViewModel.setupDataStore(context)
+        //sharedViewModel.setRoles()
+        //sharedViewModel.saveChanges()
+        //sharedViewModel.setupDataStore(context)
         /*sharedViewModel.getDieOne().collect(){
             die1.value = it!!.toInt()
         }

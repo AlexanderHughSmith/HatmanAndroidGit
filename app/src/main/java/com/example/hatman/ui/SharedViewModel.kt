@@ -1,6 +1,7 @@
 package com.example.hatman.ui
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -23,7 +24,7 @@ class SharedViewModel @Inject constructor(
     val die1: MutableState<Int> = mutableStateOf(1)
     val die2: MutableState<Int> = mutableStateOf(2)
     val isDieShown: MutableState<Boolean> = mutableStateOf(false)
-    val displayText: MutableState<String> = mutableStateOf("Roll to start")
+    val displayText: MutableState<String> = mutableStateOf("Roll to start!")
     val rotateAngle: MutableState<Float> = mutableStateOf(0f)
     val comingFromPlayingScreen: MutableState<Boolean> = mutableStateOf(false)
     val gameAlreadySetUp: MutableState<Boolean> = mutableStateOf(false)
@@ -50,9 +51,7 @@ class SharedViewModel @Inject constructor(
 
 
     suspend fun addPlayers(players: List<String>) {
-
         val playerList = mutableListOf<Player>()
-
         players.forEach {
             playerList += Player(
                 id = 0,
@@ -62,19 +61,37 @@ class SharedViewModel @Inject constructor(
                 isRolling = false
             )
         }
-
         repository.addPlayers(playerList)
+        while(_players.value.isEmpty()){
+            delay(100)
+            _players.value = repository.getAllPlayers.first()
+        }
+        setRoles()
+        saveChanges()
+        displayText.value = "Roll to start!"
+        die1.value = 1
+        die2.value = 2
+        isDieShown.value = true
     }
 
     suspend fun deleteAllPlayers() {
         repository.deleteAllPlayers()
+        _players.value = listOf()
     }
 
     fun getAllPlayers() {
         viewModelScope.launch {
-            repository.getAllPlayers.collect {
-                _players.value = it
-            }
+            _players.value = repository.getAllPlayers.first()
+        }
+    }
+
+    suspend fun setupFromSplash(context: Context){
+        hatmanDataStore = HatmanDataStore(context)
+        _players.value = repository.getAllPlayers.first()
+        if(players.value.isNotEmpty()){
+            setRoles()
+            saveChanges()
+            setupDataStore(context)
         }
     }
 
@@ -214,7 +231,6 @@ class SharedViewModel @Inject constructor(
     }
 
     suspend fun setupDataStore(context: Context) {
-        hatmanDataStore = HatmanDataStore(context)
         with(hatmanDataStore) {
             die1.value = getDieOne.first().toInt()
             displayText.value = getDisplayText.first()

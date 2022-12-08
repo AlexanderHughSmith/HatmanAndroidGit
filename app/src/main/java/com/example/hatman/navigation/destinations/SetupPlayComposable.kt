@@ -37,10 +37,17 @@ fun NavGraphBuilder.setupPlayComposable(
             )
         },
         exitTransition = {
-            slideOutHorizontally (
-                targetOffsetX = { fullWidth -> -fullWidth },
-                animationSpec = tween(durationMillis = NORMAL_ANIMATION_SPEED)
-            )
+            if(sharedViewModel.comingFromPlayingScreen.value){
+                slideOutHorizontally (
+                    targetOffsetX = { fullWidth -> fullWidth },
+                    animationSpec = tween(durationMillis = NORMAL_ANIMATION_SPEED)
+                )
+            } else {
+                slideOutHorizontally (
+                    targetOffsetX = { fullWidth -> -fullWidth },
+                    animationSpec = tween(durationMillis = NORMAL_ANIMATION_SPEED)
+                )
+            }
         }
     ) {
         SetupPlayScreen(

@@ -34,35 +34,18 @@ fun SetupScreen(
     navController: NavHostController,
     sharedViewModel: SharedViewModel
 ) {
-    val coroutineScope = rememberCoroutineScope()
-
-    LaunchedEffect(key1 = true) {
-        sharedViewModel.getAllPlayers()
-    }
-    if(!sharedViewModel.comingFromPlayingScreen.value && sharedViewModel.players.collectAsState().value.isNotEmpty()) {
-        LaunchedEffect(Unit) {
-            navController.navigate(Screens.SetupPlay.route){
-                popUpTo(Screens.Setup.route) {
-                    inclusive = true
-                }
-            }
+    Scaffold(
+        topBar = {
+            SetupAppBar(navController = navController)
+        },
+        content = {
+            SetupScreenContent(
+                modifier = Modifier.padding(it),
+                navController = navController,
+                sharedViewModel = sharedViewModel
+            )
         }
-    }
-    else{
-        //sharedViewModel.comingFromPlayingScreen.value = false
-        Scaffold(
-            topBar = {
-                SetupAppBar(navController = navController)
-            },
-            content = {
-                SetupScreenContent(
-                    modifier = Modifier.padding(it),
-                    navController = navController,
-                    sharedViewModel = sharedViewModel
-                )
-            }
-        )
-    }
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
