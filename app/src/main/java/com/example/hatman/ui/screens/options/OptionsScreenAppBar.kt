@@ -45,6 +45,9 @@ fun SetupScreenAppBar(
                 )
             }
         },
+        /*colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.background,
+        ),*/
     )
 }
 
