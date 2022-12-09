@@ -102,66 +102,70 @@ fun playerRowPreview() {
     var players = remember{
         mutableStateListOf("", "", "", "")
     }
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-    ){
-        Row(
+    MaterialTheme(
+        colorScheme = darkColorScheme()
+    ) {
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-                .padding(top = 32.dp),
-            verticalAlignment = Alignment.Top,
-            horizontalArrangement = Arrangement.Center
+                .fillMaxSize()
         ){
-            Button(
-                onClick = {
-                    players.add("")
-                },
-            ) {
-                Text(
-                    text = "Add Player +"
-                )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .padding(top = 32.dp),
+                verticalAlignment = Alignment.Top,
+                horizontalArrangement = Arrangement.Center
+            ){
+                Button(
+                    onClick = {
+                        players.add("")
+                    },
+                ) {
+                    Text(
+                        text = "Add Player +"
+                    )
+                }
             }
-        }
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(5f),
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ){
-            itemsIndexed(
-                items = players
-            ) { index, player ->
-                playerRow(
-                    playerNumber = index + 1,
-                    playerName = player,
-                    onTextChanged = { players[players.indexOf(player)] = it },
-                    isDelete = players.size > 3,
-                    onDelete = {
-                        players.remove(player)
-                        Log.d("SetupScreen", players.toString())
-                    }
-                )
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(5f),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ){
+                itemsIndexed(
+                    items = players
+                ) { index, player ->
+                    playerRow(
+                        playerNumber = index + 1,
+                        playerName = player,
+                        onTextChanged = { players[players.indexOf(player)] = it },
+                        isDelete = players.size > 3,
+                        onDelete = {
+                            players.remove(player)
+                            Log.d("SetupScreen", players.toString())
+                        }
+                    )
+                }
             }
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-                .padding(bottom = 32.dp),
-            verticalAlignment = Alignment.Bottom,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Button(
-                onClick = {
-                },
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .padding(bottom = 32.dp),
+                verticalAlignment = Alignment.Bottom,
+                horizontalArrangement = Arrangement.Center
             ) {
-                Text(
-                    text = "Let's Play!",
-                    fontSize = 24.sp
-                )
+                Button(
+                    onClick = {
+                    },
+                ) {
+                    Text(
+                        text = "Let's Play!",
+                        fontSize = 24.sp
+                    )
+                }
             }
         }
     }

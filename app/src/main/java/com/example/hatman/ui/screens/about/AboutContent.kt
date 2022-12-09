@@ -133,7 +133,12 @@ fun AboutContent(
         item{
             Text("Color Theme")
             val radioOptions = listOf("System", "Dark", "Light")
-            val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[0]) }
+            val selectedIndex = when(sharedViewModel.darkTheme.value){
+                null -> 0
+                true -> 1
+                false -> 2
+            }
+            val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[selectedIndex]) }
             // Note that Modifier.selectableGroup() is essential to ensure correct accessibility behavior
             Column(Modifier.selectableGroup()) {
                 radioOptions.forEach { text ->

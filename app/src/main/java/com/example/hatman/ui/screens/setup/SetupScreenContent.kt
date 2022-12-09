@@ -1,11 +1,14 @@
 package com.example.hatman.ui.screens.setup
 
+import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -139,22 +142,27 @@ fun SetupScreenContentView(
 }
 
 @Preview(showBackground = true)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun SetupScreenContentViewPreview() {
-    val players = remember{
-        mutableStateListOf("", "", "", "")
+    MaterialTheme(
+        colorScheme = darkColorScheme()
+    ) {
+        val players = remember{
+            mutableStateListOf("", "", "", "")
+        }
+        SetupScreenContentView(
+            modifier = Modifier,
+            players = players,
+            onAddPlayerClicked = {
+                players.add("")
+            },
+            onRemovePlayerClicked = {
+                players.removeAt(it)
+            },
+            onLetsPlayClicked = {
+                //navController.navigate("setup_play")
+            },
+        )
     }
-    SetupScreenContentView(
-        modifier = Modifier,
-        players = players,
-        onAddPlayerClicked = {
-            players.add("")
-        },
-        onRemovePlayerClicked = {
-            players.removeAt(it)
-        },
-        onLetsPlayClicked = {
-            //navController.navigate("setup_play")
-        },
-    )
 }

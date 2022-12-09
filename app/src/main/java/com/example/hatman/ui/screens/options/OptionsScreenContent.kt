@@ -1,5 +1,6 @@
 package com.example.hatman.ui.screens.options
 
+import android.graphics.fonts.FontStyle
 import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
@@ -53,15 +54,36 @@ fun OptionsScreenContent(
         verticalArrangement = Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-
-        OptionButtonDescription(
+        Button(
+            onClick = {
+                coroutineScope.launch {
+                    navigate = if(sharedViewModel.players.first().isNotEmpty()) 4 else 1
+                }
+            }
+        ){
+           Text(
+               text = "Let's Play!",
+               style = MaterialTheme.typography.headlineLarge,
+           )
+        }
+        Button(
+            onClick = {
+                coroutineScope.launch {
+                    navigate = 3
+                }
+            }
+        ){
+            Text(
+                text = "How to Play",
+                style = MaterialTheme.typography.headlineMedium,
+            )
+        }
+        /*OptionButtonDescription(
             modifier = Modifier,
             message = "Setup Game",
             description = "Enter the names of everyone playing. We will let you know who should take a drink by name and keep track of everyone's score.",
             onButtonClick = {
-                coroutineScope.launch {
-                    navigate = if(sharedViewModel.players.first().isNotEmpty()) 4 else 1
-                }
+
             }
         )
         OptionButtonDescription(
@@ -79,7 +101,7 @@ fun OptionsScreenContent(
             onButtonClick = {
                 navigate = 3
             }
-        )
+        )*/
     }
 }
 
