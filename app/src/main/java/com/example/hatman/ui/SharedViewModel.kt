@@ -87,13 +87,20 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    suspend fun setupFromSplash(context: Context){
-        hatmanDataStore = HatmanDataStore(context)
+    fun setupFromMain(context: Context) {
+        viewModelScope.launch {
+            hatmanDataStore = HatmanDataStore(context)
+            darkTheme.value = hatmanDataStore.getDarkTheme.first().toBooleanStrictOrNull()
+            useDynamicColors.value = hatmanDataStore.getDynamicColors.first().toBoolean()
+        }
+    }
+
+    suspend fun setupFromSplash(){
         _players.value = repository.getAllPlayers.first()
         if(players.value.isNotEmpty()){
             setRoles()
             saveChanges()
-            setupDataStore(context)
+            setupDataStore()
         }
     }
 
@@ -232,7 +239,19 @@ class SharedViewModel @Inject constructor(
         repository.updateAllPlayers(players.value)
     }
 
-    suspend fun setupDataStore(context: Context) {
+    fun updateDarkTheme(){
+        viewModelScope.launch {
+            hatmanDataStore.saveDarkTheme(darkTheme.value)
+        }
+    }
+
+    fun updateDynamicColors(){
+        viewModelScope.launch {
+            hatmanDataStore.saveDynamicColors(useDynamicColors.value)
+        }
+    }
+
+    suspend fun setupDataStore() {
         with(hatmanDataStore) {
             die1.value = getDieOne.first().toInt()
             displayText.value = getDisplayText.first()

@@ -63,7 +63,7 @@ fun SplashScreen(
         //sharedViewModel.getAllPlayers()
 
         //sharedViewModel.getAllPlayers();
-        sharedViewModel.setupFromSplash(context)
+        sharedViewModel.setupFromSplash()
 
         /*sharedViewModel.setRoles()
         sharedViewModel.saveChanges()

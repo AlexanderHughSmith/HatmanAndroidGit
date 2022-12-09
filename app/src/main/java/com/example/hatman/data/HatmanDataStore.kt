@@ -14,6 +14,8 @@ class HatmanDataStore(private val context: Context) {
         val DISPLAY_TEXT_KEY = stringPreferencesKey("display_text")
         val DIE_ONE = stringPreferencesKey("die_one")
         val DIE_TWO = stringPreferencesKey("die_two")
+        val DYNAMIC_COLORS = stringPreferencesKey("dynamic_colors")
+        val DARK_THEME = stringPreferencesKey("dark_theme")
     }
 
     val getDisplayText: Flow<String> = context.dataStore.data
@@ -46,6 +48,42 @@ class HatmanDataStore(private val context: Context) {
     suspend fun saveDieTwo(dieTwo: Int) {
         context.dataStore.edit { preferences ->
             preferences[DIE_TWO] = dieTwo.toString()
+        }
+    }
+
+    val getDarkTheme: Flow<String> = context.dataStore.data
+        .map { preferences ->
+            preferences[DARK_THEME] ?: ""
+        }
+
+    suspend fun saveDarkTheme(darkTheme: Boolean?) {
+        if(darkTheme != null){
+            context.dataStore.edit { preferences ->
+                preferences[DARK_THEME] = darkTheme.toString()
+            }
+        }
+        else{
+            context.dataStore.edit { preferences ->
+                preferences[DARK_THEME] = ""
+            }
+        }
+    }
+
+    val getDynamicColors: Flow<String> = context.dataStore.data
+        .map { preferences ->
+            preferences[DYNAMIC_COLORS] ?: ""
+        }
+
+    suspend fun saveDynamicColors(dynamicColors: Boolean?) {
+        if(dynamicColors != null){
+            context.dataStore.edit { preferences ->
+                preferences[DYNAMIC_COLORS] = dynamicColors.toString()
+            }
+        }
+        else{
+            context.dataStore.edit { preferences ->
+                preferences[DYNAMIC_COLORS] = ""
+            }
         }
     }
 
