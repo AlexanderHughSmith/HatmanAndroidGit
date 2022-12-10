@@ -25,7 +25,13 @@ fun SetupNavGraph(
         startDestination = SPLASH_SCREEN
     ) {
         splashComposable (
-            { navController.navigate(Screens.Options.route) },
+            {
+                navController.navigate(Screens.Options.route) {
+                    popUpTo(0){
+                        inclusive = true
+                    }
+                }
+            },
             sharedViewModel
         )
         optionsComposable(
