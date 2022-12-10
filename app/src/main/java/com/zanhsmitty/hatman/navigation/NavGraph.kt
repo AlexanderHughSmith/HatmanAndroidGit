@@ -16,9 +16,9 @@ fun SetupNavGraph(
     sharedViewModel: SharedViewModel
 ) {
 
-    val screen = remember(navController) {
+    /*val screen = remember(navController) {
         Screens2(navController = navController)
-    }
+    }*/
 
     AnimatedNavHost(
         navController = navController,
