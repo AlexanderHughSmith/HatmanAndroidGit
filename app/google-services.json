@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "163003728225",
-    "project_id": "hatman-6024a",
-    "storage_bucket": "hatman-6024a.appspot.com"
+    "project_number": "44382145908",
+    "project_id": "hatman-9f87b",
+    "storage_bucket": "hatman-9f87b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:163003728225:android:e88e79a307a898da704520",
+        "mobilesdk_app_id": "1:44382145908:android:51b4386ae5196f9faab021",
         "android_client_info": {
-          "package_name": "com.example.hatman"
+          "package_name": "com.zanhsmitty.hatman"
         }
       },
       "oauth_client": [
         {
-          "client_id": "163003728225-9os66hulakfab2rf83fr4r07m1f8q3v8.apps.googleusercontent.com",
+          "client_id": "44382145908-9tufjo5p13tr4punelktpjs9b93quli2.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBIImryOgkvzmGNmXqJOGLpbduoBSLrgEA"
+          "current_key": "AIzaSyBfGAzRV3C5oL9qIfjURHA_eia5nVG_Ajc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "163003728225-9os66hulakfab2rf83fr4r07m1f8q3v8.apps.googleusercontent.com",
+              "client_id": "44382145908-9tufjo5p13tr4punelktpjs9b93quli2.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

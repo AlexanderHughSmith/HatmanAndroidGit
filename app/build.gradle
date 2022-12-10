@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.hatman'
+    namespace 'com.zanhsmitty.hatman'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.hatman"
+        applicationId "com.zanhsmitty.hatman"
         minSdk 21
         targetSdk 33
         versionCode 2
