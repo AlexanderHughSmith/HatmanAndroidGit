@@ -59,9 +59,5 @@ fun RuleRow(
 fun RuleRowPreview() {
     val dieOne: Int = R.drawable.one
     val dieTwo: Int = R.drawable.two
-    val dieThree: Int = R.drawable.three
-    val dieFour: Int = R.drawable.four
-    val dieFive: Int = R.drawable.five
-    val dieSix: Int = R.drawable.six
     RuleRow(Modifier,dieOne,dieTwo,"Test Rule!")
 }

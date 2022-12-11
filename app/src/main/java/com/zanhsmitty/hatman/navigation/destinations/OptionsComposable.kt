@@ -29,9 +29,6 @@ fun NavGraphBuilder.optionsComposable(
                 animationSpec = tween(durationMillis = NORMAL_ANIMATION_SPEED)
             )
         }
-    /*popEnterTransition = {
-        fadeIn(animationSpec = tween(100))
-    }*/
     ) {
         OptionsScreen(navController = navController, sharedViewModel = sharedViewModel)
     }

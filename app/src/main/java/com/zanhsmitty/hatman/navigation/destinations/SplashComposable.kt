@@ -6,8 +6,8 @@ import androidx.compose.animation.slideOutVertically
 import androidx.navigation.NavGraphBuilder
 import com.zanhsmitty.hatman.ui.SharedViewModel
 import com.zanhsmitty.hatman.ui.screens.splash.SplashScreen
-import com.zanhsmitty.hatman.util.Constants.SPLASH_SCREEN
 import com.google.accompanist.navigation.animation.composable
+import com.zanhsmitty.hatman.navigation.Screens
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.splashComposable(
@@ -15,7 +15,7 @@ fun NavGraphBuilder.splashComposable(
     sharedViewModel: SharedViewModel
 ) {
     composable(
-        route = SPLASH_SCREEN,
+        route = Screens.Splash.route,
         exitTransition = {
             slideOutVertically(
                 targetOffsetY = { fullHeight -> -fullHeight },

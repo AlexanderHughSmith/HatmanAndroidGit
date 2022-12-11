@@ -10,7 +10,7 @@ import com.zanhsmitty.hatman.navigation.Screens
 import com.zanhsmitty.hatman.ui.SharedViewModel
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
+@ExperimentalMaterial3Api
 @Composable
 fun SetupPlayScreen(
     navController: NavHostController,
@@ -42,7 +42,6 @@ fun SetupPlayScreen(
         content = {
             SetupPlayScreenContent(
                 modifier = Modifier.padding(it),
-                navController = navController,
                 sharedViewModel = sharedViewModel
             )
         }

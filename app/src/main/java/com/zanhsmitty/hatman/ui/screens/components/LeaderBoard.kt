@@ -1,6 +1,5 @@
 package com.zanhsmitty.hatman.ui.screens.components
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -24,7 +23,6 @@ fun LeaderBoard(
     playerList: List<Player>,
     color: Color
 ) {
-    Log.d("TextScreen", "LeaderboardComposable")
     LeaderBoardView(playerList = playerList, color = color)
 }
 

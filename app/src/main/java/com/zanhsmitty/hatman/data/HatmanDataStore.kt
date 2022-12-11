@@ -12,6 +12,7 @@ class HatmanDataStore(private val context: Context) {
     companion object{
         private val Context.dataStore by preferencesDataStore(name = "HatmanDataStore")
         val DISPLAY_TEXT_KEY = stringPreferencesKey("display_text")
+        //TODO: use intPreferenceKeys
         val DIE_ONE = stringPreferencesKey("die_one")
         val DIE_TWO = stringPreferencesKey("die_two")
         val DYNAMIC_COLORS = stringPreferencesKey("dynamic_colors")

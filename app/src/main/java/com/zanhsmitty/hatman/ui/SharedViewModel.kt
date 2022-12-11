@@ -33,18 +33,18 @@ class SharedViewModel @Inject constructor(
     private lateinit var hatmanDataStore: HatmanDataStore
 
     private var random = Random(System.currentTimeMillis())
-    val rollDice2 = {
+    /*val rollDice2 = {
         rollDice()
     }
     fun rollDice() {
         die1.value = random.nextInt(1, 7)
         die2.value = random.nextInt(1, 7)
-    }
+    }*/
 
-    var hatmanIndex by Delegates.notNull<Int>()
-    var currentIndex by Delegates.notNull<Int>()
-    var aheadIndex by Delegates.notNull<Int>()
-    var behindIndex by Delegates.notNull<Int>()
+    private var hatmanIndex by Delegates.notNull<Int>()
+    private var currentIndex by Delegates.notNull<Int>()
+    private var aheadIndex by Delegates.notNull<Int>()
+    private var behindIndex by Delegates.notNull<Int>()
 
 
     private val _players = MutableStateFlow<List<Player>>(emptyList())
@@ -80,11 +80,11 @@ class SharedViewModel @Inject constructor(
         _players.value = listOf()
     }
 
-    fun getAllPlayers() {
+    /*fun getAllPlayers() {
         viewModelScope.launch {
             _players.value = repository.getAllPlayers.first()
         }
-    }
+    }*/
 
     fun setupFromMain(context: Context) {
         viewModelScope.launch {
@@ -103,7 +103,7 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    fun setRoles(){
+    private fun setRoles(){
         currentIndex = players.value.indexOfFirst{ player ->
             player.isRolling
         }
@@ -123,8 +123,8 @@ class SharedViewModel @Inject constructor(
             hatmanIndex = random.nextInt(0, players.value.size)
         }
 
-        players.value.get(currentIndex).isRolling = true
-        players.value.get(hatmanIndex).isHatman = true
+        players.value[currentIndex].isRolling = true
+        players.value[hatmanIndex].isHatman = true
 
         aheadIndex = (currentIndex + 1) % players.value.size
         behindIndex = if(currentIndex > 0)
@@ -211,13 +211,13 @@ class SharedViewModel @Inject constructor(
     }
 
     private fun handleNewHatman(){
-        players.value.get(hatmanIndex).isHatman = false
-        players.value.get(currentIndex).isRolling = false
+        players.value[hatmanIndex].isHatman = false
+        players.value[currentIndex].isRolling = false
         hatmanIndex = currentIndex
 
-        players.value.get(hatmanIndex).isHatman = true
+        players.value[hatmanIndex].isHatman = true
         currentIndex = aheadIndex
-        players.value.get(currentIndex).isRolling = true
+        players.value[currentIndex].isRolling = true
 
         aheadIndex = (currentIndex + 1) % players.value.size
         behindIndex = if(currentIndex > 0)
@@ -226,11 +226,11 @@ class SharedViewModel @Inject constructor(
             players.value.size - 1
     }
 
-    suspend fun clearGame(){
+    /*suspend fun clearGame(){
         repository.deleteAllPlayers()
-    }
+    }*/
 
-    suspend fun saveChanges(){
+    private suspend fun saveChanges(){
         repository.updateAllPlayers(players.value)
     }
 
@@ -250,7 +250,7 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    suspend fun setupDataStore() {
+    private suspend fun setupDataStore() {
         with(hatmanDataStore) {
             die1.value = getDieOne.first().toInt()
             displayText.value = getDisplayText.first()

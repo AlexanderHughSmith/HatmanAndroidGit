@@ -16,7 +16,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -38,7 +37,6 @@ fun SplashScreen(
             navigateToListScreen()
         }
     }
-    //Log.d("OptionsScreen", "SplashScreen")
     var startAnimation by remember { mutableStateOf(false) }
     val offsetState by animateDpAsState(
         targetValue = if (startAnimation) 0.dp else 100.dp,
@@ -52,22 +50,12 @@ fun SplashScreen(
             durationMillis = 1000
         )
     )
-    val context = LocalContext.current
     LaunchedEffect(key1 = true) {
         startAnimation = true
-        //sharedViewModel.getAllPlayers()
-
-        //sharedViewModel.getAllPlayers();
         sharedViewModel.setupFromSplash()
-
-        /*sharedViewModel.setRoles()
-        sharedViewModel.saveChanges()
-        sharedViewModel.setupDataStore(context)*/
-        //sharedViewModel.getAllPlayers()
         delay(SPLASH_SCREEN_DELAY)
         navigate = true
     }
-
     Splash(offsetState = offsetState, alphaState = alphaState)
 }
 

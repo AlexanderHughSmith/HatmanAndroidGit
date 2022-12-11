@@ -73,30 +73,6 @@ fun OptionsScreenContent(
                 style = MaterialTheme.typography.headlineMedium,
             )
         }
-        /*OptionButtonDescription(
-            modifier = Modifier,
-            message = "Setup Game",
-            description = "Enter the names of everyone playing. We will let you know who should take a drink by name and keep track of everyone's score.",
-            onButtonClick = {
-
-            }
-        )
-        OptionButtonDescription(
-            modifier = Modifier,
-            message = "Quick Play",
-            description = "Roll 2 dice and we will tell you the role of the player that should take a drink.",
-            onButtonClick = {
-                navigate = 2
-            }
-        )
-        OptionButtonDescription(
-            modifier = Modifier,
-            message = "How To Play",
-            description = "Look over the rules and learn how to play the game.",
-            onButtonClick = {
-                navigate = 3
-            }
-        )*/
     }
 }
 

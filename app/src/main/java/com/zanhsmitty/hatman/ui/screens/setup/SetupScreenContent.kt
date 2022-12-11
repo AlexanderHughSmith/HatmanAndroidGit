@@ -5,10 +5,7 @@ import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,20 +19,19 @@ import com.zanhsmitty.hatman.util.Constants.MAX_PLAYERS
 import com.zanhsmitty.hatman.util.Constants.MIN_PLAYERS
 import kotlinx.coroutines.launch
 
+@ExperimentalMaterial3Api
 @Composable
 fun SetupScreenContent(
     modifier: Modifier,
     navController: NavHostController,
     sharedViewModel: SharedViewModel
 ) {
-    //val players = remember{ mutableStateListOf("", "", "", "") }
     sharedViewModel.comingFromPlayingScreen.value = false
     val players = remember{ mutableStateListOf("one", "two", "three", "four") }
     val coroutineScope = rememberCoroutineScope()
     var navigate: Boolean by remember { mutableStateOf(false) }
     if(navigate){
         LaunchedEffect(Unit) {
-            //navController.popBackStack(Screens.Options.route, false)
             navController.navigate(Screens.SetupPlay.route){
                 popUpTo(Screens.Options.route){
                     inclusive = false
@@ -43,7 +39,7 @@ fun SetupScreenContent(
             }
         }
     }
-    navController.backQueue.forEachIndexed() { index, backStackEntry ->
+    navController.backQueue.forEachIndexed { index, backStackEntry ->
         Log.d("SetupScreenContent", "index:"+index+" "+backStackEntry.destination.toString())
     }
     SetupScreenContentView(
@@ -64,6 +60,7 @@ fun SetupScreenContent(
     )
 }
 
+@ExperimentalMaterial3Api
 @Composable
 fun SetupScreenContentView(
     modifier: Modifier,
@@ -105,7 +102,7 @@ fun SetupScreenContentView(
             itemsIndexed(
                 items = players
             ) { index, player ->
-                playerRow(
+                PlayerRow(
                     playerNumber = index + 1,
                     playerName = player,
                     onTextChanged = {
@@ -140,6 +137,7 @@ fun SetupScreenContentView(
     }
 }
 
+@ExperimentalMaterial3Api
 @Preview(showBackground = true)
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
@@ -159,9 +157,7 @@ fun SetupScreenContentViewPreview() {
             onRemovePlayerClicked = {
                 players.removeAt(it)
             },
-            onLetsPlayClicked = {
-                //navController.navigate("setup_play")
-            },
+            onLetsPlayClicked = {},
         )
     }
 }

@@ -6,7 +6,5 @@ import com.zanhsmitty.hatman.data.model.Player
 
 @Database(entities = [Player::class], version = 1)
 abstract class HatmanDatabase : RoomDatabase() {
-
     abstract fun hatmanDao(): HatmanDao
-
 }

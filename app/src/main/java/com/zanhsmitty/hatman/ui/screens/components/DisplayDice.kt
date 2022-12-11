@@ -10,12 +10,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.zanhsmitty.hatman.ui.theme.LOGO_HEIGHT
 import com.zanhsmitty.hatman.R
 
-val dieOne: Int = R.drawable.one
-val dieTwo: Int = R.drawable.two
-val dieThree: Int = R.drawable.three
-val dieFour: Int = R.drawable.four
-val dieFive: Int = R.drawable.five
-val dieSix: Int = R.drawable.six
+//TODO: Ability to customize dice
+
+const val dieOne: Int = R.drawable.one
+const val dieTwo: Int = R.drawable.two
+const val dieThree: Int = R.drawable.three
+const val dieFour: Int = R.drawable.four
+const val dieFive: Int = R.drawable.five
+const val dieSix: Int = R.drawable.six
 
 @Composable
 fun DisplayDice(
@@ -26,8 +28,8 @@ fun DisplayDice(
     isDieShown: Boolean
 ) {
 
-    var dice1: Int = setUpDie(number1)
-    var dice2: Int = setUpDie(number2)
+    val dice1: Int = setUpDie(number1)
+    val dice2: Int = setUpDie(number2)
     Row(
         modifier = modifier
             .fillMaxWidth(),

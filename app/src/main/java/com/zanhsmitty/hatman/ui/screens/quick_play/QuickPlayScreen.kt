@@ -1,5 +1,5 @@
 package com.zanhsmitty.hatman.ui.screens.quick_play
-
+/*
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -13,6 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.zanhsmitty.hatman.ui.screens.components.DisplayDice
 import com.zanhsmitty.hatman.ui.theme.SMALL_PADDING
+
 
 @Composable
 fun QuickPlayScreen() {
@@ -42,7 +43,7 @@ fun QuickPlayScreen() {
         )
         Button(
             onClick = {
-//                throw RuntimeException("Test Crash") // Force a crash
+                throw RuntimeException("Test Crash") // Force a crash
                 number1 = (1..6).random()
                 number2 = (1..6).random()
                 displayText = handleDisplayText(number1, number2)
@@ -100,4 +101,4 @@ fun MainScreenPreview() {
 @Composable
 fun MainScreenPreviewDark() {
     QuickPlayScreen()
-}
+}*/

@@ -7,23 +7,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.zanhsmitty.hatman.ui.SharedViewModel
 import com.zanhsmitty.hatman.ui.screens.components.DisplayDice
 import com.zanhsmitty.hatman.ui.screens.components.LeaderBoard
 import com.zanhsmitty.hatman.ui.theme.LARGE_PADDING
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SetupPlayScreenContent(
     modifier: Modifier,
-    navController: NavHostController,
     sharedViewModel: SharedViewModel
 ) {
     val die1 by remember { mutableStateOf(sharedViewModel.die1) }
     val die2 by remember { mutableStateOf(sharedViewModel.die2) }
-    var dieShown by remember { mutableStateOf(sharedViewModel.isDieShown) }
+    val dieShown by remember { mutableStateOf(sharedViewModel.isDieShown) }
     var isDieEnabled by remember { mutableStateOf(true) }
     val displayText by remember {
         mutableStateOf(
@@ -31,23 +28,6 @@ fun SetupPlayScreenContent(
         )
     }
     val coroutineScope = rememberCoroutineScope()
-    //val context = LocalContext.current
-
-    LaunchedEffect(true) {
-        //sharedViewModel.startNewGame()
-        //sharedViewModel.setRoles()
-        //sharedViewModel.saveChanges()
-        //sharedViewModel.setupDataStore(context)
-        /*sharedViewModel.getDieOne().collect(){
-            die1.value = it!!.toInt()
-        }
-        sharedViewModel.getDisplayText().collect(){
-            displayText.value = it!!
-        }*/
-    }
-    val playerList by remember {
-        mutableStateOf(sharedViewModel.players.value)
-    }
     Column(
         modifier = modifier.fillMaxSize()
     ){

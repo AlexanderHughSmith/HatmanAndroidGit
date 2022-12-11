@@ -1,7 +1,6 @@
 package com.zanhsmitty.hatman.ui.screens.setup_play
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.res.painterResource
@@ -13,7 +12,7 @@ import com.zanhsmitty.hatman.R
 import com.zanhsmitty.hatman.navigation.Screens
 import com.zanhsmitty.hatman.ui.theme.LARGE_PADDING
 
-@OptIn(ExperimentalMaterial3Api::class)
+@ExperimentalMaterial3Api
 @Composable
 fun SetupPlayAppBar(
     navController: NavHostController,
@@ -113,7 +112,7 @@ fun SetupPlayAppBar(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@ExperimentalMaterial3Api
 @Preview(showBackground = true)
 @Composable
 fun SetupScreenAppBarPreview() {

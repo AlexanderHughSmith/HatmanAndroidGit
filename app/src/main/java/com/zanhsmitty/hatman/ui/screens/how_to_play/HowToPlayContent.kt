@@ -31,7 +31,7 @@ fun HowToPlayContent(
     LazyColumn(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(15.dp)
-    ){
+    ) {
         item {
             DividingHeader("Basic Rules")
         }

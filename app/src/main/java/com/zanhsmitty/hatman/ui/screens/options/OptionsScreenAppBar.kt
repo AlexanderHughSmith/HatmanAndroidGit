@@ -1,6 +1,5 @@
 package com.zanhsmitty.hatman.ui.screens.options
 
-import androidx.compose.material.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.res.painterResource
@@ -10,7 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.zanhsmitty.hatman.R
 import com.zanhsmitty.hatman.navigation.Screens
 
-@OptIn(ExperimentalMaterial3Api::class)
+@ExperimentalMaterial3Api
 @Composable
 fun SetupScreenAppBar(
     navController: NavHostController
@@ -18,7 +17,6 @@ fun SetupScreenAppBar(
     var navigate: Boolean by remember { mutableStateOf(false) }
     if(navigate){
         LaunchedEffect(Unit) {
-            //navController.popBackStack(Screens.Options.route, false)
             navController.navigate(Screens.About.route)
         }
     }
@@ -42,13 +40,10 @@ fun SetupScreenAppBar(
                 )
             }
         },
-        /*colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = MaterialTheme.colorScheme.background,
-        ),*/
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@ExperimentalMaterial3Api
 @Preview(showBackground = true)
 @Composable
 fun SetupScreenAppBarPreview() {

@@ -17,8 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.zanhsmitty.hatman.ui.SharedViewModel
 
-
-@OptIn(ExperimentalMaterial3Api::class)
+@ExperimentalMaterial3Api
 @Composable
 fun SetupScreen(
     navController: NavHostController,
@@ -38,9 +37,9 @@ fun SetupScreen(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@ExperimentalMaterial3Api
 @Composable
-fun playerRow(
+fun PlayerRow(
     playerNumber: Int,
     playerName:String,
     onTextChanged: (String) -> Unit,
@@ -63,8 +62,7 @@ fun playerRow(
         Button(
             modifier = Modifier
                 .size(70.dp)
-                .padding(16.dp) // margin
-                //.border(2.dp, Color.Transparent)
+                .padding(16.dp)
                 .align(Alignment.CenterEnd),
             shape = CircleShape,
             contentPadding = PaddingValues(0.dp),
@@ -86,10 +84,11 @@ fun playerRow(
     }
 }
 
+@ExperimentalMaterial3Api
 @Preview(showBackground = true, widthDp = 360, heightDp = 640)
 @Composable
-fun playerRowPreview() {
-    var players = remember{
+fun PlayerRowPreview() {
+    val players = remember{
         mutableStateListOf("", "", "", "")
     }
     MaterialTheme(
@@ -127,7 +126,7 @@ fun playerRowPreview() {
                 itemsIndexed(
                     items = players
                 ) { index, player ->
-                    playerRow(
+                    PlayerRow(
                         playerNumber = index + 1,
                         playerName = player,
                         onTextChanged = { players[players.indexOf(player)] = it },
@@ -160,10 +159,3 @@ fun playerRowPreview() {
         }
     }
 }
-/*
-
-@Preview(showBackground = true)
-@Composable
-fun OptionsScreenPreview() {
-    OptionsScreen(navController = rememberNavController())
-}*/

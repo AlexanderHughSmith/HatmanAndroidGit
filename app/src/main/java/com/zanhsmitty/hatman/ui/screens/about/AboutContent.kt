@@ -24,13 +24,11 @@ import com.zanhsmitty.hatman.R
 import com.zanhsmitty.hatman.ui.SharedViewModel
 import com.zanhsmitty.hatman.ui.theme.LARGE_PADDING
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutContent(
     modifier : Modifier,
     sharedViewModel: SharedViewModel,
 ) {
-
     LazyColumn(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(15.dp),
@@ -40,6 +38,7 @@ fun AboutContent(
             BasicTextRow("Version: ${BuildConfig.VERSION_NAME}")
         }
         item {
+            //TODO: Make a feedback composable
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -66,58 +65,6 @@ fun AboutContent(
 
             }
         }
-        /*item{
-            val options = listOf("System", "Dark", "Light")
-            var expanded by remember { mutableStateOf(false) }
-            var selectedOptionText by remember { mutableStateOf(options[0]) }
-            selectedOptionText = when(sharedViewModel.darkTheme.value){
-                null -> options[0]
-                true -> options[1]
-                false -> options[2]
-            }
-
-            ExposedDropdownMenuBox(
-                expanded = expanded,
-                onExpandedChange = {
-                    expanded = !expanded
-                },
-            ) {
-                TextField(
-                    readOnly = true,
-                    value = selectedOptionText,
-                    onValueChange = { },
-                    label = { Text("Color Theme") },
-                    trailingIcon = {
-                        ExposedDropdownMenuDefaults.TrailingIcon(
-                            expanded = expanded
-                        )
-                    },
-                    colors = ExposedDropdownMenuDefaults.textFieldColors(),
-                    modifier = Modifier.menuAnchor()
-                )
-                ExposedDropdownMenu(
-                    expanded = expanded,
-                    onDismissRequest = {
-                        expanded = false
-                    }
-                ) {
-                    options.forEach { selectionOption ->
-                        DropdownMenuItem(
-                            onClick = {
-                                selectedOptionText = selectionOption
-                                expanded = false
-                                when(selectionOption){
-                                    "System" -> sharedViewModel.darkTheme.value = null
-                                    "Dark" -> sharedViewModel.darkTheme.value = true
-                                    "Light" -> sharedViewModel.darkTheme.value = false
-                                }
-                            },
-                            text = { Text(selectionOption) }
-                        )
-                    }
-                }
-            }
-        }*/
         item{
             Text("Color Theme")
             val radioOptions = listOf("System", "Dark", "Light")
@@ -152,7 +99,7 @@ fun AboutContent(
                     ) {
                         RadioButton(
                             selected = (text == selectedOption),
-                            onClick = null // null recommended for accessibility with screenreaders
+                            onClick = null // null recommended for accessibility with screen readers
                         )
                         Text(
                             text = text,
