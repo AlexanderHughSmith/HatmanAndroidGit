@@ -1,6 +1,5 @@
 package com.zanhsmitty.hatman.ui
 
-import android.content.Context
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -17,7 +16,8 @@ import kotlin.random.Random
 
 @HiltViewModel
 class SharedViewModel @Inject constructor(
-    private val repository: HatmanRepository
+    private val repository: HatmanRepository,
+    private val dataStore: HatmanDataStore
 ) : ViewModel() {
 
     val die1: MutableState<Int> = mutableStateOf(1)
@@ -30,16 +30,7 @@ class SharedViewModel @Inject constructor(
     val useDynamicColors: MutableState<Boolean> = mutableStateOf(true)
     val darkTheme: MutableState<Boolean?> = mutableStateOf(null)
 
-    private lateinit var hatmanDataStore: HatmanDataStore
-
     private var random = Random(System.currentTimeMillis())
-    /*val rollDice2 = {
-        rollDice()
-    }
-    fun rollDice() {
-        die1.value = random.nextInt(1, 7)
-        die2.value = random.nextInt(1, 7)
-    }*/
 
     private var hatmanIndex by Delegates.notNull<Int>()
     private var currentIndex by Delegates.notNull<Int>()
@@ -80,17 +71,10 @@ class SharedViewModel @Inject constructor(
         _players.value = listOf()
     }
 
-    /*fun getAllPlayers() {
+    fun setupFromMain() {
         viewModelScope.launch {
-            _players.value = repository.getAllPlayers.first()
-        }
-    }*/
-
-    fun setupFromMain(context: Context) {
-        viewModelScope.launch {
-            hatmanDataStore = HatmanDataStore(context)
-            darkTheme.value = hatmanDataStore.getDarkTheme.first()
-            useDynamicColors.value = hatmanDataStore.getDynamicColors.first()
+            darkTheme.value = dataStore.getDarkTheme.first()
+            useDynamicColors.value = dataStore.getDynamicColors.first()
         }
     }
 
@@ -145,9 +129,9 @@ class SharedViewModel @Inject constructor(
             speed += 10
         }
         displayText.value = handleDiceRoll(die1.value, die2.value)
-        hatmanDataStore.saveDisplayText(displayText.value)
-        hatmanDataStore.saveDieOne(die1.value)
-        hatmanDataStore.saveDieTwo(die2.value)
+        dataStore.saveDisplayText(displayText.value)
+        dataStore.saveDieOne(die1.value)
+        dataStore.saveDieTwo(die2.value)
     }
 
     private fun handleDiceRoll(die1: Int, die2:Int): String {
@@ -226,10 +210,6 @@ class SharedViewModel @Inject constructor(
             players.value.size - 1
     }
 
-    /*suspend fun clearGame(){
-        repository.deleteAllPlayers()
-    }*/
-
     private suspend fun saveChanges(){
         repository.updateAllPlayers(players.value)
     }
@@ -240,18 +220,18 @@ class SharedViewModel @Inject constructor(
 
     fun updateDarkTheme(){
         viewModelScope.launch {
-            hatmanDataStore.saveDarkTheme(darkTheme.value)
+            dataStore.saveDarkTheme(darkTheme.value)
         }
     }
 
     fun updateDynamicColors(){
         viewModelScope.launch {
-            hatmanDataStore.saveDynamicColors(useDynamicColors.value)
+            dataStore.saveDynamicColors(useDynamicColors.value)
         }
     }
 
     private suspend fun setupDataStore() {
-        with(hatmanDataStore) {
+        with(dataStore) {
             die1.value = getDieOne.first()
             displayText.value = getDisplayText.first()
             die2.value = getDieTwo.first()
@@ -259,6 +239,6 @@ class SharedViewModel @Inject constructor(
         isDieShown.value = true
     }
     suspend fun handleNewGameDataStore(){
-        hatmanDataStore.handleNewGameDataStore()
+        dataStore.handleNewGameDataStore()
     }
 }

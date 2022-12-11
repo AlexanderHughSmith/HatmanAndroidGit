@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedViewModel.setupFromMain(this)
+        sharedViewModel.setupFromMain()
         setContent {
             HatmanTheme(
                 darkTheme = if(sharedViewModel.darkTheme.value != null) sharedViewModel.darkTheme.value!! else isSystemInDarkTheme(),
