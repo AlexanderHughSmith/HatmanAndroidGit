@@ -2,6 +2,7 @@ package com.zanhsmitty.hatman.navigation.destinations
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import com.zanhsmitty.hatman.navigation.Screens
@@ -9,6 +10,7 @@ import com.zanhsmitty.hatman.ui.screens.how_to_play.HowToPlayScreen
 import com.zanhsmitty.hatman.util.Constants.NORMAL_ANIMATION_SPEED
 import com.google.accompanist.navigation.animation.composable
 
+@ExperimentalMaterial3Api
 @ExperimentalAnimationApi
 fun NavGraphBuilder.howToPlayComposable(
     navController: NavHostController,

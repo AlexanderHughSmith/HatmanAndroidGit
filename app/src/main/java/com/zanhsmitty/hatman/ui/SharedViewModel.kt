@@ -89,8 +89,8 @@ class SharedViewModel @Inject constructor(
     fun setupFromMain(context: Context) {
         viewModelScope.launch {
             hatmanDataStore = HatmanDataStore(context)
-            darkTheme.value = hatmanDataStore.getDarkTheme.first().toBooleanStrictOrNull()
-            useDynamicColors.value = hatmanDataStore.getDynamicColors.first().toBoolean()
+            darkTheme.value = hatmanDataStore.getDarkTheme.first()
+            useDynamicColors.value = hatmanDataStore.getDynamicColors.first()
         }
     }
 
@@ -252,13 +252,13 @@ class SharedViewModel @Inject constructor(
 
     private suspend fun setupDataStore() {
         with(hatmanDataStore) {
-            die1.value = getDieOne.first().toInt()
+            die1.value = getDieOne.first()
             displayText.value = getDisplayText.first()
-            die2.value = getDieTwo.first().toInt()
+            die2.value = getDieTwo.first()
         }
         isDieShown.value = true
     }
-    suspend fun clearDataStore(){
-        hatmanDataStore.resetDataStore()
+    suspend fun handleNewGameDataStore(){
+        hatmanDataStore.handleNewGameDataStore()
     }
 }

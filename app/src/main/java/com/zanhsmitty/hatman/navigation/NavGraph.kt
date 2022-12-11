@@ -1,12 +1,14 @@
 package com.zanhsmitty.hatman.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.zanhsmitty.hatman.ui.SharedViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.zanhsmitty.hatman.navigation.destinations.*
 
+@ExperimentalMaterial3Api
 @ExperimentalAnimationApi
 @Composable
 fun SetupNavGraph(

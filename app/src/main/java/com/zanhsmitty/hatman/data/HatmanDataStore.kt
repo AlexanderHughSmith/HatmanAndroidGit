@@ -1,7 +1,9 @@
 package com.zanhsmitty.hatman.data
 
 import android.content.Context
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
@@ -10,13 +12,12 @@ import kotlinx.coroutines.flow.map
 class HatmanDataStore(private val context: Context) {
 
     companion object{
-        private val Context.dataStore by preferencesDataStore(name = "HatmanDataStore")
+        private val Context.dataStore by preferencesDataStore("HatmanDataStore")
         val DISPLAY_TEXT_KEY = stringPreferencesKey("display_text")
-        //TODO: use intPreferenceKeys
-        val DIE_ONE = stringPreferencesKey("die_one")
-        val DIE_TWO = stringPreferencesKey("die_two")
-        val DYNAMIC_COLORS = stringPreferencesKey("dynamic_colors")
-        val DARK_THEME = stringPreferencesKey("dark_theme")
+        val DIE_ONE_KEY = intPreferencesKey("die_one")
+        val DIE_TWO_KEY = intPreferencesKey("die_two")
+        val DYNAMIC_COLORS_KEY = booleanPreferencesKey("dynamic_colors")
+        val DARK_THEME_KEY = booleanPreferencesKey("dark_theme")
     }
 
     val getDisplayText: Flow<String> = context.dataStore.data
@@ -30,67 +31,69 @@ class HatmanDataStore(private val context: Context) {
         }
     }
 
-    val getDieOne: Flow<String> = context.dataStore.data
+    val getDieOne: Flow<Int> = context.dataStore.data
         .map { preferences ->
-            preferences[DIE_ONE] ?: "1"
+            preferences[DIE_ONE_KEY] ?: 1
         }
 
     suspend fun saveDieOne(dieOne: Int) {
         context.dataStore.edit { preferences ->
-            preferences[DIE_ONE] = dieOne.toString()
+            preferences[DIE_ONE_KEY] = dieOne
         }
     }
 
-    val getDieTwo: Flow<String> = context.dataStore.data
+    val getDieTwo: Flow<Int> = context.dataStore.data
         .map { preferences ->
-            preferences[DIE_TWO] ?: "2"
+            preferences[DIE_TWO_KEY] ?: 2
         }
 
     suspend fun saveDieTwo(dieTwo: Int) {
         context.dataStore.edit { preferences ->
-            preferences[DIE_TWO] = dieTwo.toString()
+            preferences[DIE_TWO_KEY] = dieTwo
         }
     }
 
-    val getDarkTheme: Flow<String> = context.dataStore.data
+    val getDarkTheme: Flow<Boolean?> = context.dataStore.data
         .map { preferences ->
-            preferences[DARK_THEME] ?: ""
+            preferences[DARK_THEME_KEY]
         }
 
     suspend fun saveDarkTheme(darkTheme: Boolean?) {
         if(darkTheme != null){
             context.dataStore.edit { preferences ->
-                preferences[DARK_THEME] = darkTheme.toString()
+                preferences[DARK_THEME_KEY] = darkTheme
             }
         }
         else{
             context.dataStore.edit { preferences ->
-                preferences[DARK_THEME] = ""
+                preferences.remove(DARK_THEME_KEY)
             }
         }
     }
 
-    val getDynamicColors: Flow<String> = context.dataStore.data
+    val getDynamicColors: Flow<Boolean> = context.dataStore.data
         .map { preferences ->
-            preferences[DYNAMIC_COLORS] ?: ""
+            preferences[DYNAMIC_COLORS_KEY]?: false
         }
 
     suspend fun saveDynamicColors(dynamicColors: Boolean?) {
         if(dynamicColors != null){
             context.dataStore.edit { preferences ->
-                preferences[DYNAMIC_COLORS] = dynamicColors.toString()
+                preferences[DYNAMIC_COLORS_KEY] = dynamicColors
             }
         }
         else{
             context.dataStore.edit { preferences ->
-                preferences[DYNAMIC_COLORS] = ""
+                preferences.remove(DYNAMIC_COLORS_KEY)
             }
         }
     }
 
-    suspend fun resetDataStore() {
+    suspend fun handleNewGameDataStore() {
         context.dataStore.edit { preferences ->
-            preferences.clear()
+            preferences.remove(DISPLAY_TEXT_KEY)
+            preferences.remove(DIE_ONE_KEY)
+            preferences.remove(DIE_TWO_KEY)
         }
     }
 }
