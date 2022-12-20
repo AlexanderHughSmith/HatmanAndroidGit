@@ -8,8 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.zanhsmitty.hatman.ui.SharedViewModel
-import com.zanhsmitty.hatman.ui.screens.components.DisplayDice
-import com.zanhsmitty.hatman.ui.screens.components.LeaderBoard
+import com.zanhsmitty.hatman.ui.components.DisplayDice
+import com.zanhsmitty.hatman.ui.components.LeaderBoard
 import com.zanhsmitty.hatman.ui.theme.LARGE_PADDING
 import kotlinx.coroutines.launch
 

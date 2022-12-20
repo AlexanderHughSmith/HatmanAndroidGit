@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.zanhsmitty.hatman.ui.screens.components.RuleRow
+import com.zanhsmitty.hatman.ui.components.RuleRow
 import com.zanhsmitty.hatman.ui.theme.LARGEST_PADDING
 import com.zanhsmitty.hatman.ui.theme.LARGE_PADDING
 import com.zanhsmitty.hatman.ui.theme.MEDIUM_PADDING
