@@ -12,6 +12,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import com.zanhsmitty.hatman.ui.theme.*
 import com.zanhsmitty.hatman.util.Constants.GET_FAKE_PLAYERS
@@ -32,7 +34,9 @@ fun LeaderBoardView(
     color: Color
 ) {
     Surface(
-        modifier = Modifier.padding(LARGE_PADDING),
+        modifier = Modifier
+            .semantics { contentDescription = "Leaderboard" }
+            .padding(LARGE_PADDING),
         shape = MaterialTheme.shapes.medium,
         color = color,
     ){
@@ -56,6 +60,9 @@ fun LeaderBoardRow(
 ) {
     Row(
         modifier = Modifier
+            .semantics {
+                contentDescription = "Player ${player.name} row"
+            }
             .fillMaxWidth()
             .padding(MEDIUM_PADDING),
         verticalAlignment = Alignment.Bottom,

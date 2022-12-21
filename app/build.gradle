@@ -9,6 +9,10 @@ plugins {
 
 }
 
+configurations.all {
+    resolutionStrategy.force("junit:junit:4.13.2")
+}
+
 android {
     namespace 'com.zanhsmitty.hatman'
     compileSdk 33
@@ -20,7 +24,7 @@ android {
         versionCode 2
         versionName "1.0.1"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.zanhsmitty.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary true
         }
@@ -101,4 +105,18 @@ dependencies {
 
     //Data Store
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    //Instrumentation tests
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.44'
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.44'
+    androidTestImplementation "junit:junit:4.13.2"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2"
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+    androidTestImplementation "com.google.truth:truth:1.1.3"
+    androidTestImplementation "androidx.test.ext:junit:1.1.4"
+    androidTestImplementation 'androidx.test:core-ktx:1.4.0'
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.9.3"
+    androidTestImplementation "io.mockk:mockk-android:1.12.0"
+    androidTestImplementation 'androidx.test:runner:1.5.1'
+
 }

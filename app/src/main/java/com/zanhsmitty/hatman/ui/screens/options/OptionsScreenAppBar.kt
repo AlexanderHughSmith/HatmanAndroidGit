@@ -2,7 +2,10 @@ package com.zanhsmitty.hatman.ui.screens.options
 
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -29,14 +32,15 @@ fun SetupScreenAppBar(
         },
         actions = {
             IconButton(
+                modifier = Modifier.semantics { contentDescription = "About Button" },
                 onClick = {
                     navigate = true
-                }
+                },
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.info),
                     contentDescription = "About Section",
-                    tint = MaterialTheme.colorScheme.primary
+                    tint = MaterialTheme.colorScheme.primary,
                 )
             }
         },

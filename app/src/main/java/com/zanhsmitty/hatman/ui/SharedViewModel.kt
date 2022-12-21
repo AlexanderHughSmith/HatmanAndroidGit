@@ -4,8 +4,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zanhsmitty.hatman.data.HatmanRepository
 import com.zanhsmitty.hatman.data.HatmanDataStore
+import com.zanhsmitty.hatman.data.HatmanRepository
 import com.zanhsmitty.hatman.data.model.Player
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
@@ -73,8 +73,10 @@ class SharedViewModel @Inject constructor(
 
     fun setupFromMain() {
         viewModelScope.launch {
-            darkTheme.value = dataStore.getDarkTheme.first()
-            useDynamicColors.value = dataStore.getDynamicColors.first()
+            //darkTheme.value = dataStore.getDarkTheme.first()
+            darkTheme.value = false
+            //useDynamicColors.value = dataStore.getDynamicColors.first()
+            useDynamicColors.value = true
         }
     }
 

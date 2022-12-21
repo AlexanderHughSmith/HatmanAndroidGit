@@ -10,6 +10,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -79,7 +81,12 @@ fun OptionsScreenContent(
             }
             Spacer(modifier = Modifier.weight(1f))
             Button(
-                modifier = Modifier.weight(5f),
+                modifier = Modifier
+                    .weight(5f)
+                    .semantics {
+                       contentDescription = "Play Button"
+                    }
+                ,
                 onClick = {
                     coroutineScope.launch {
                         navigate = if(playerList.first().isNotEmpty()) 4 else 1

@@ -5,6 +5,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.zanhsmitty.hatman.ui.SharedViewModel
@@ -52,6 +54,9 @@ fun SetupPlayScreenContent(
         )
         Button(
             modifier = Modifier
+                .semantics {
+                    contentDescription = "Roll Dice Button"
+                }
                 .height(75.dp)
                 .fillMaxWidth(.5F)
                 .padding(bottom = LARGE_PADDING)

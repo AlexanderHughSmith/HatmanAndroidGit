@@ -9,6 +9,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.navigation.NavHostController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -47,11 +49,13 @@ fun PlayerRow(
     onDelete: () -> Unit = {}
 ){
     Box(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
         TextField(
             modifier = Modifier
+                .semantics { contentDescription = "Player-$playerNumber-textField" }
                 .fillMaxWidth(.7f)
                 .padding(8.dp),
             value = playerName,

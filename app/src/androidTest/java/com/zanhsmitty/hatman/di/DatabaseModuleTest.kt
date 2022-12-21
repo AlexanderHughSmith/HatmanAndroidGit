@@ -5,27 +5,27 @@ import androidx.room.Room
 import com.zanhsmitty.hatman.data.HatmanDao
 import com.zanhsmitty.hatman.data.HatmanDatabase
 import com.zanhsmitty.hatman.data.HatmanRepository
-import com.zanhsmitty.hatman.util.Constants.DATABASE_NAME
+import com.zanhsmitty.hatman.util.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import org.junit.Assert.*
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DatabaseModule {
+object DatabaseModuleTest {
 
     @Provides
     @Singleton
     fun provideDatabase(
         @ApplicationContext context: Context
     ): HatmanDatabase {
-        return Room.databaseBuilder(
+        return Room.inMemoryDatabaseBuilder(
             context,
             HatmanDatabase::class.java,
-            DATABASE_NAME
         ).build()
     }
 

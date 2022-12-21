@@ -6,6 +6,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.zanhsmitty.hatman.R
@@ -57,6 +59,7 @@ fun SetupPlayAppBar(
             var expanded by remember { mutableStateOf(false) }
 
             IconButton(
+                modifier = Modifier.semantics { contentDescription = "More Options Button" },
                 onClick = { expanded = true }
             ) {
                 Icon(

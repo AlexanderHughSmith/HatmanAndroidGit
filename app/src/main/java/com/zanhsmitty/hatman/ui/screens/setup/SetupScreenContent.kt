@@ -9,6 +9,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -52,9 +54,9 @@ fun SetupScreenContent(
             players.removeAt(it)
         },
         onLetsPlayClicked = {
+            navigate = true
             coroutineScope.launch {
                 sharedViewModel.addPlayers(players)
-                navigate = true
             }
         },
     )
@@ -82,6 +84,11 @@ fun SetupScreenContentView(
             horizontalArrangement = Arrangement.Center
         ){
             Button(
+                modifier = Modifier
+                    .semantics {
+                        contentDescription = "Add Player Button"
+                    }
+                ,
                 onClick = {
                     onAddPlayerClicked()
                 },
@@ -124,6 +131,10 @@ fun SetupScreenContentView(
             horizontalArrangement = Arrangement.Center
         ) {
             Button(
+                modifier = Modifier
+                    .semantics {
+                        contentDescription = "Lets Play Button"
+                    },
                 onClick = {
                     onLetsPlayClicked()
                 },

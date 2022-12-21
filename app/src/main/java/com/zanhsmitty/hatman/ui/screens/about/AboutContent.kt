@@ -26,6 +26,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -48,6 +50,9 @@ fun AboutContent(
     val showDialog = remember { mutableStateOf(false) }
     if(showDialog.value){
         AlertDialog(
+            modifier = Modifier.semantics {
+              contentDescription = "Theme Dialog"
+            },
             onDismissRequest = { showDialog.value = false },
             title = { Text("Color Theme") },
             text = {
@@ -64,6 +69,9 @@ fun AboutContent(
                     radioOptions.forEach { text ->
                         Row(
                             Modifier
+                                .semantics {
+                                    contentDescription = "Theme-${text}"
+                                }
                                 .fillMaxWidth()
                                 .height(56.dp)
                                 .selectable(
@@ -97,12 +105,17 @@ fun AboutContent(
                    },
             dismissButton = {
                 Divider()
-                Button(onClick = { showDialog.value = false }) {
+                Button(
+                    modifier = Modifier.semantics {
+                      contentDescription = "Dismiss"
+                    },
+                    onClick = { showDialog.value = false }
+                ) {
                     Text("OK")
                 }
             },
             confirmButton = {
-            }
+            },
         )
     }
 
@@ -178,7 +191,10 @@ fun AboutContent(
                                 alpha = 0.5f
                             ),
                             shape = MaterialTheme.shapes.small
-                        ),
+                        )
+                        .semantics {
+                            contentDescription = "Color Theme Card"
+                        },
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
@@ -190,7 +206,10 @@ fun AboutContent(
                     IconButton(
                         modifier = Modifier
                             .rotate(degrees = angle)
-                            .weight(weight = 1f),
+                            .weight(weight = 1f)
+                            .semantics {
+                                       contentDescription = "Open color theme dialog"
+                            },
                         onClick = { showDialog.value = true }
                     ) {
                         Icon(
