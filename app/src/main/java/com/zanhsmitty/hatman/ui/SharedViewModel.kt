@@ -67,8 +67,10 @@ class SharedViewModel @Inject constructor(
     }
 
     suspend fun deleteAllPlayers() {
-        repository.deleteAllPlayers()
-        _players.value = listOf()
+        viewModelScope.launch(Dispatchers.Main) {
+            repository.deleteAllPlayers()
+            _players.value = listOf()
+        }
     }
 
     fun setupFromMain() {

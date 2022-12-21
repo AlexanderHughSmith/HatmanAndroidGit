@@ -16,6 +16,21 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="-1617863942">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="OnePlus&#10; IN2015" value="120" />
+                  <entry key="Resizable_Experimental_API_33" value="120" />
+                  <entry key="Tests" value="360" />
+                  <entry key="adb-36a1f997-mtZm3y._adb-tls-connect._tcp." value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="-1336809351">
           <value>
             <AndroidTestResultsTableState>
@@ -74,8 +89,11 @@
               <option name="preferredColumnWidths">
                 <map>
                   <entry key="Duration" value="90" />
+                  <entry key="OnePlus&#10; IN2015" value="120" />
+                  <entry key="Pixel_6_API_30" value="120" />
                   <entry key="Resizable_Experimental_API_33" value="120" />
                   <entry key="Tests" value="360" />
+                  <entry key="adb-36a1f997-mtZm3y._adb-tls-connect._tcp." value="120" />
                 </map>
               </option>
             </AndroidTestResultsTableState>

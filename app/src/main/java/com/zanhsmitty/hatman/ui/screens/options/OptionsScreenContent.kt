@@ -67,7 +67,12 @@ fun OptionsScreenContent(
             modifier = Modifier.padding(horizontal = LARGER_PADDING)
         ){
             Button(
-                modifier = Modifier.weight(5f),
+                modifier = Modifier
+                    .weight(5f)
+                    .semantics {
+                        contentDescription = "Rules Button"
+                    }
+                ,
                 onClick = {
                     coroutineScope.launch {
                         navigate = 3

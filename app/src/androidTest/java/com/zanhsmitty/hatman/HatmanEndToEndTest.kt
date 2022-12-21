@@ -1,6 +1,5 @@
 package com.zanhsmitty.hatman
 
-import android.os.Looper
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -16,6 +15,7 @@ import com.zanhsmitty.hatman.di.DatabaseModule
 import com.zanhsmitty.hatman.navigation.Screens
 import com.zanhsmitty.hatman.ui.SharedViewModelTest
 import com.zanhsmitty.hatman.ui.screens.about.AboutScreen
+import com.zanhsmitty.hatman.ui.screens.how_to_play.HowToPlayScreen
 import com.zanhsmitty.hatman.ui.screens.options.OptionsScreen
 import com.zanhsmitty.hatman.ui.screens.setup.SetupScreen
 import com.zanhsmitty.hatman.ui.screens.setup_play.SetupPlayScreen
@@ -23,8 +23,6 @@ import com.zanhsmitty.hatman.ui.theme.HatmanTheme
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -39,6 +37,23 @@ class HatmanEndToEndTest {
 
     @get: Rule(order = 1)
     val composeRule = createComposeRule()
+
+    private val playButton = composeRule.onNodeWithContentDescription("Play Button")
+    private val rulesButton = composeRule.onNodeWithContentDescription("Rules Button")
+    private val addPlayerButton = composeRule.onNodeWithContentDescription("Add Player Button")
+    private val startGameButton = composeRule.onNodeWithContentDescription("Lets Play Button")
+    private val leaderBoard = composeRule.onNodeWithContentDescription("Leaderboard")
+    private val rollDiceButton = composeRule.onNodeWithContentDescription("Roll Dice Button")
+    private val backButton = composeRule.onNodeWithContentDescription("Back Button")
+    private val aboutButton = composeRule.onNodeWithContentDescription("About Button")
+    private val moreOptionsButton = composeRule.onNodeWithContentDescription("More Options Button")
+    private fun getPlayerTextBox(index: Int) = composeRule.onNodeWithContentDescription("Player-$index-textField")
+    private fun getPlayerRowByName(name: String) = composeRule.onNodeWithContentDescription("Player $name row")
+    private fun waitForDiceToStopRolling() = composeRule.waitUntil(
+        10000L
+    ) {
+        composeRule.onAllNodesWithText("Rolling...").fetchSemanticsNodes().isEmpty()
+    }
 
 
     @Before
@@ -81,6 +96,9 @@ class HatmanEndToEndTest {
                             sharedViewModel = sharedViewModel.viewModel
                         )
                     }
+                    composable(route = Screens.HowToPlay.route){
+                        HowToPlayScreen(navController = navController)
+                    }
                 }
             }
         }
@@ -99,33 +117,94 @@ class HatmanEndToEndTest {
     }
 
     @Test
-    fun Navigate_to_play_page_create_5_players_assert_leaderboard_works(){
-        composeRule.onNodeWithContentDescription("Play Button").assertIsDisplayed()
-        composeRule.onNodeWithContentDescription("Play Button").performClick()
-        composeRule.onNodeWithContentDescription("Add Player Button").assertIsDisplayed()
-        composeRule.onNodeWithContentDescription("Add Player Button").performClick()
-        composeRule.onNodeWithContentDescription("Player-5-textField").performTextInput("Player 5")
+    fun endToEndTest(){
+        // Options Screen
+        playButton.assertIsDisplayed()
+        playButton.performClick()
+        // Setup Screen
+        addPlayerButton.assertIsDisplayed()
+        addPlayerButton.performClick()
+        getPlayerTextBox(5).performTextInput("Player 5")
+        startGameButton.assertIsDisplayed()
+        startGameButton.performClick()
+        // Setup Play Screen
+        leaderBoard.assertIsDisplayed()
+        getPlayerRowByName("one").assertIsDisplayed()
+        getPlayerRowByName("Player 5").assertIsDisplayed()
+        rollDiceButton.performClick()
+        waitForDiceToStopRolling()
+        rollDiceButton.performClick()
+        waitForDiceToStopRolling()
         Espresso.pressBack()
-        composeRule.onNodeWithContentDescription("Lets Play Button").assertIsDisplayed()
-        composeRule.onNodeWithContentDescription("Lets Play Button").performClick()
-        composeRule.onNodeWithContentDescription("Leaderboard").assertIsDisplayed()
-        composeRule.onNodeWithContentDescription("Player one row").assertIsDisplayed()
-        composeRule.onNodeWithContentDescription("Player Player 5 row").assertIsDisplayed()
-        composeRule.onNodeWithContentDescription("More Options Button").assertExists()
-        composeRule.onNodeWithContentDescription("Roll Dice Button").performClick()
-        composeRule.onNodeWithContentDescription("Die One").assertIsDisplayed()
-        //assert(composeRule.onAllNodesWithText("Rolling...").fetchSemanticsNodes().isNotEmpty())
-        composeRule.waitUntil(
-            10000L
-        ) {
-            composeRule.onAllNodesWithText("Rolling...").fetchSemanticsNodes().isEmpty()
+        // Options Screen
+        playButton.assertIsDisplayed()
+        playButton.performClick()
+        // Setup Play Screen
+        rollDiceButton.assertIsDisplayed()
+        rollDiceButton.performClick()
+        waitForDiceToStopRolling()
+        Espresso.pressBack()
+        // Options Screen
+        rulesButton.assertIsDisplayed()
+        rulesButton.performClick()
+        // How To Play Screen
+        composeRule.onNodeWithText("How To Play").assertIsDisplayed()
+        backButton.performClick()
+        // Options Screen
+        aboutButton.assertIsDisplayed()
+        aboutButton.performClick()
+        // About Screen
+        composeRule.onNodeWithText("Version").assertIsDisplayed()
+        Espresso.pressBack()
+        // Options Screen
+        playButton.assertIsDisplayed()
+        playButton.performClick()
+        // Setup Play Screen
+        rollDiceButton.performClick()
+        waitForDiceToStopRolling()
+        moreOptionsButton.assertExists()
+        moreOptionsButton.performClick()
+        composeRule.onNodeWithText("New Game").assertIsDisplayed()
+        composeRule.onNodeWithText("New Game").performClick()
+        // Setup Screen
+        composeRule.waitUntil (10000L){
+            composeRule.onAllNodesWithText("Setup").fetchSemanticsNodes().isNotEmpty()
         }
-        composeRule.onNodeWithContentDescription("Roll Dice Button").performClick()
-        composeRule.waitUntil(
-            10000L
-        ) {
-            composeRule.onAllNodesWithText("Rolling...").fetchSemanticsNodes().isEmpty()
-        }
-        composeRule.onNodeWithContentDescription("Roll Dice Button").performClick()
+        Espresso.pressBack()
+        // Options Screen
+        playButton.assertIsDisplayed()
+        playButton.performClick()
+        // Setup Screen
+        addPlayerButton.assertIsDisplayed()
+        addPlayerButton.performClick()
+        addPlayerButton.performClick()
+        getPlayerTextBox(5).performTextInput("Player 5")
+        getPlayerTextBox(6).performTextInput("six")
+        startGameButton.assertIsDisplayed()
+        startGameButton.performClick()
+        // Setup Play Screen
+        rollDiceButton.performClick()
+        waitForDiceToStopRolling()
+        getPlayerRowByName("six").assertIsDisplayed()
+        moreOptionsButton.assertIsDisplayed()
+        moreOptionsButton.performClick()
+        composeRule.onNodeWithText("Rules").assertIsDisplayed()
+        composeRule.onNodeWithText("Rules").performClick()
+        // How To Play Screen
+        composeRule.onNodeWithText("How To Play").assertIsDisplayed()
+        Espresso.pressBack()
+        // Setup Play Screen
+        rollDiceButton.performClick()
+        waitForDiceToStopRolling()
+        moreOptionsButton.assertIsDisplayed()
+        moreOptionsButton.performClick()
+        composeRule.onNodeWithText("About").assertIsDisplayed()
+        composeRule.onNodeWithText("About").performClick()
+        // About Screen
+        composeRule.onNodeWithText("Version").assertIsDisplayed()
+        Espresso.pressBack()
+        // Setup Play Screen
+        rollDiceButton.performClick()
+        waitForDiceToStopRolling()
     }
 }
