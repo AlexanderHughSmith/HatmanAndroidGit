@@ -3,7 +3,6 @@ package com.zanhsmitty.hatman.ui.screens.options
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -14,15 +13,12 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.zanhsmitty.hatman.R
 import com.zanhsmitty.hatman.data.model.Player
 import com.zanhsmitty.hatman.navigation.Screens
-import com.zanhsmitty.hatman.ui.SharedViewModel
 import com.zanhsmitty.hatman.ui.theme.LARGER_PADDING
-import com.zanhsmitty.hatman.ui.theme.MEDIUM_PADDING
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
@@ -156,6 +152,6 @@ fun SetupScreenPreview() {
     OptionsScreenContent(
         modifier = Modifier,
         navController = rememberNavController(),
-        playerList = MutableStateFlow<List<Player>>(listOf())
+        playerList = MutableStateFlow(listOf())
     )
 }

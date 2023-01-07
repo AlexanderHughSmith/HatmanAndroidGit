@@ -4,7 +4,6 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -18,17 +17,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.DefaultAlpha
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -36,9 +30,7 @@ import com.zanhsmitty.hatman.BuildConfig
 import com.zanhsmitty.hatman.R
 import com.zanhsmitty.hatman.ui.SharedViewModel
 import com.zanhsmitty.hatman.ui.components.DetailCard
-import com.zanhsmitty.hatman.ui.theme.LARGEST_PADDING
 import com.zanhsmitty.hatman.ui.theme.LARGE_PADDING
-import com.zanhsmitty.hatman.ui.theme.MEDIUM_PADDING
 
 @ExperimentalMaterial3Api
 @Composable
@@ -228,7 +220,7 @@ fun copyToClipboard(text: String, context: Context) {
     clipboard?.setPrimaryClip(ClipData.newPlainText("",text))
 }
 
-@Composable
+/*@Composable
 fun BasicTextRow(
     message: String
 ) {
@@ -239,7 +231,7 @@ fun BasicTextRow(
         text = message,
         textAlign = TextAlign.Center
     )
-}
+}*/
 
 //preview for HotToPlayContent
 @Preview(showBackground = true)

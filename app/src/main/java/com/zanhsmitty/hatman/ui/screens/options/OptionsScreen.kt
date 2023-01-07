@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.zanhsmitty.hatman.ui.SharedViewModel
-import kotlinx.coroutines.flow.first
 
 @ExperimentalMaterial3Api
 @Composable

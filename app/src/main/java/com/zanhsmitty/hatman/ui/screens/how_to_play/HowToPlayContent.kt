@@ -8,13 +8,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zanhsmitty.hatman.ui.components.RuleRow
 import com.zanhsmitty.hatman.ui.theme.LARGEST_PADDING
 import com.zanhsmitty.hatman.ui.theme.LARGE_PADDING
-import com.zanhsmitty.hatman.ui.theme.MEDIUM_PADDING
 import com.zanhsmitty.hatman.R
 
 
@@ -36,16 +34,16 @@ fun HowToPlayContent(
             DividingHeader("Basic Rules")
         }
         item {
-            BasicRuleRow("Pick a person to be the hatman and another play that starts (Not the same player).")
+            BasicRuleRow("We will randomly select one player to be the hatman and another player who will go first. (Not the same player).")
         }
         item {
-            BasicRuleRow("The player will role the dice until there role results in no one taking a drink.")
+            BasicRuleRow("The player, who we selected at random to go first, will role the dice until there role results in no one taking a drink.")
         }
         item {
-            BasicRuleRow("When this happens, the players turn will end and the next player (left) will start their turn.")
+            BasicRuleRow("When this happens, the players turn will end and the next player (to the left) will start their turn.")
         }
         item {
-            BasicRuleRow("Note: the hatman can not roll the dice. They will be skipped and the next player will begin their turn.")
+            BasicRuleRow("Note: The hatman can not roll the dice. They will be skipped and the next player will begin their turn.")
         }
         item {
             DividingHeader("Dice Rules")
@@ -96,15 +94,14 @@ fun DividingHeader(
     Text(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = MEDIUM_PADDING),
+            .padding(horizontal = LARGE_PADDING),
         color = MaterialTheme.colorScheme.tertiary,
         text = message,
-        textAlign = TextAlign.Center
     )
     Divider(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = LARGEST_PADDING),
+            .padding(start= LARGE_PADDING, end = LARGEST_PADDING),
         color = Color.Gray,
         thickness = 1.dp
     )
@@ -114,12 +111,12 @@ fun DividingHeader(
 fun BasicRuleRow(
     message: String
 ) {
+    val bullet = "\u2022"
     Text(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = LARGE_PADDING),
-        text = message,
-        textAlign = TextAlign.Center
+        text = "$bullet\t$message"
     )
 }
 

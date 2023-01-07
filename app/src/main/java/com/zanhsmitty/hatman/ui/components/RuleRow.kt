@@ -6,7 +6,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.zanhsmitty.hatman.ui.theme.MEDIUM_PADDING
 import com.zanhsmitty.hatman.ui.theme.SMALL_DIE_HEIGHT
@@ -47,9 +46,9 @@ fun RuleRow(
         )
         Text(
             modifier = Modifier
-                .weight(4f),
-            text = message,
-            textAlign = TextAlign.Center
+                .weight(4f)
+                .padding(horizontal = MEDIUM_PADDING),
+            text = message
         )
     }
 }
