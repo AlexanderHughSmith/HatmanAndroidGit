@@ -75,10 +75,10 @@ class SharedViewModel @Inject constructor(
 
     fun setupFromMain() {
         viewModelScope.launch {
-            //darkTheme.value = dataStore.getDarkTheme.first()
-            darkTheme.value = false
-            //useDynamicColors.value = dataStore.getDynamicColors.first()
-            useDynamicColors.value = true
+            darkTheme.value = dataStore.getDarkTheme.first()
+            //darkTheme.value = false
+            useDynamicColors.value = dataStore.getDynamicColors.first()
+            //useDynamicColors.value = true
         }
     }
 
